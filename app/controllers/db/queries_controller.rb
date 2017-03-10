@@ -19,7 +19,7 @@ class Db::QueriesController < ApplicationController
     @db_query = Db::Query.new(db_query_params)
 
     respond_to do |format|
-      if @db_query.save
+      if @db_query.run
         format.html { redirect_to @db_query, notice: 'Query was successfully created.' }
         format.json { render :show, status: :created, location: @db_query }
       else
@@ -55,6 +55,6 @@ class Db::QueriesController < ApplicationController
     end
 
     def db_query_params
-      params.require(:db_query).permit(:body, :db_connection_id, :fields, :result, :description, :duration)
+      params.require(:db_query).permit(:body, :db_connection_id, :description)
     end
 end
