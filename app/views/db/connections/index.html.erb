@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Db Connections</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Adapter</th>
+      <th>User</th>
+      <th>Password</th>
+      <th>Host</th>
+      <th>Encoding</th>
+      <th>Timeout</th>
+      <th>Database</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @db_connections.each do |db_connection| %>
+      <tr>
+        <td><%= db_connection.adapter %></td>
+        <td><%= db_connection.user %></td>
+        <td><%= db_connection.password %></td>
+        <td><%= db_connection.host %></td>
+        <td><%= db_connection.encoding %></td>
+        <td><%= db_connection.timeout %></td>
+        <td><%= db_connection.database %></td>
+        <td><%= link_to 'Show', db_connection %></td>
+        <td><%= link_to 'Edit', edit_db_connection_path(db_connection) %></td>
+        <td><%= link_to 'Destroy', db_connection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Db Connection', new_db_connection_path %>

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Adapter:</strong>
+  <%= @db_connection.adapter %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @db_connection.user %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @db_connection.password %>
+</p>
+
+<p>
+  <strong>Host:</strong>
+  <%= @db_connection.host %>
+</p>
+
+<p>
+  <strong>Encoding:</strong>
+  <%= @db_connection.encoding %>
+</p>
+
+<p>
+  <strong>Timeout:</strong>
+  <%= @db_connection.timeout %>
+</p>
+
+<p>
+  <strong>Database:</strong>
+  <%= @db_connection.database %>
+</p>
+
+<%= link_to 'Edit', edit_db_connection_path(@db_connection) %> |
+<%= link_to 'Back', db_connections_path %>
