@@ -1,6 +1,8 @@
 class Db::Query < ApplicationRecord
   belongs_to :db_connection, class_name: Db::Connection
 
+  delegate :database, to: :db_connection
+
   def run
     t1 = Time.current
     response = db_connection.connector.query(body)

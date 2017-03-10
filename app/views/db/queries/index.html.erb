@@ -8,36 +8,62 @@
 
 <%= link_to 'New Query', "#", class: "js-toggle-query-form" %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Body</th>
-      <th>Db connection</th>
-      <th>Fields</th>
-      <th>Result</th>
-      <th>Description</th>
-      <th>Duration</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @db_queries.each do |query| %>
+  <div class="query">
+    <div class="query__description">
+      <%= query.description %>
+      <time>
+        <%= query.created_at.to_s(:short) %>
+      </time>
+    </div>
 
-  <tbody>
-    <% @db_queries.each do |db_query| %>
-      <tr>
-        <td><%= db_query.body %></td>
-        <td><%= db_query.db_connection %></td>
-        <td><%= db_query.fields %></td>
-        <td><%= db_query.result %></td>
-        <td><%= db_query.description %></td>
-        <td><%= db_query.duration %></td>
-        <td><%= link_to 'Show', db_query %></td>
-        <td><%= link_to 'Edit', edit_db_query_path(db_query) %></td>
-        <td><%= link_to 'Destroy', db_query, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <div class="query__sql-body">
+      <div class="query__db">
+        <%= query.database  %>
+      </div>
+
+      <pre>
+        <code>
+<%= query.body.strip %>
+        </code>
+      </pre>
+    </div>
+
+    <% fields = JSON.parse(query.fields) %>
+    <% results = JSON.parse(query.result) %>
+
+    <div class="query__results">
+      <table>
+        <thead>
+          <tr>
+            <% fields.each do |field| %>
+              <th>
+                <%= field %>
+              </th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% results.first(10).each do |values| %>
+            <tr>
+              <% values.each do |value| %>
+                <td>
+                  <%= value  %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% if results.size > 10 %>
+      <div class="query__total-results">
+        Total results: <%= results.size  %>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+<% end %>
 
-<br>
 
-<%= link_to 'New Db Query', new_db_query_path %>
+
