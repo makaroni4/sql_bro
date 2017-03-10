@@ -2,7 +2,7 @@ class Db::QueriesController < ApplicationController
   before_action :set_db_query, only: [:show, :edit, :update, :destroy]
 
   def index
-    @db_queries = Db::Query.all
+    @db_queries = Db::Query.order(created_at: :desc)
     @db_query = Db::Query.new
   end
 
@@ -21,8 +21,8 @@ class Db::QueriesController < ApplicationController
 
     respond_to do |format|
       if @db_query.run
-        format.html { redirect_to @db_query, notice: 'Query was successfully created.' }
-        format.json { render :show, status: :created, location: @db_query }
+        format.html { redirect_to action: :index, notice: 'Query was successfully created.' }
+        format.json { redirect_to :show, status: :created, location: @db_query }
       else
         format.html { render :new }
         format.json { render json: @db_query.errors, status: :unprocessable_entity }
