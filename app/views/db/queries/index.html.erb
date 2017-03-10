@@ -2,6 +2,12 @@
 
 <h1>Db Queries</h1>
 
+<div class="query-form">
+  <%= render "form", db_query: @db_query %>
+</div>
+
+<%= link_to 'New Query', "#", class: "js-toggle-query-form" %>
+
 <table>
   <thead>
     <tr>

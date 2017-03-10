@@ -3,6 +3,7 @@ class Db::QueriesController < ApplicationController
 
   def index
     @db_queries = Db::Query.all
+    @db_query = Db::Query.new
   end
 
   def show
