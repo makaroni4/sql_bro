@@ -42,8 +42,12 @@
 
     border-radius: 2px;
 
-    pre:first-line {
-      line-height: 0px;
+    pre {
+      display: flex;
+
+      &:first-line {
+        line-height: 0px;
+      }
     }
   }
 
