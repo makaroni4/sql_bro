@@ -13,6 +13,7 @@ gem 'sqlite3'
 # Use pg and mysql2 for remote DB connectinos
 gem "pg"
 gem "mysql2"
+gem "redis"
 # Use Trie for autocomplete
 gem 'rambling-trie'
 # Use Puma as the app server
