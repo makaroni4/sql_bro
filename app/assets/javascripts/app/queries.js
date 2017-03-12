@@ -10,6 +10,6 @@ $(function() {
     var description = $(this).find("#db_query_description").val();
     var sqlBody = $(this).find("#db_query_body").val();
 
-    App.query.appear(dbConnectionId, sqlBody, description);
+    App.query.run(dbConnectionId, sqlBody, description);
   });
 });
