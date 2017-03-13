@@ -6,64 +6,6 @@
   <%= render "form", db_query: @db_query %>
 </div>
 
-<%= link_to 'New Query', "#", class: "js-toggle-query-form" %>
+<%= link_to "New Query", "#", class: "js-toggle-query-form" %>
 
-<% @db_queries.each do |query| %>
-  <div class="query">
-    <div class="query__description">
-      <%= query.description %>
-      <time>
-        <%= query.created_at.to_s(:short) %>
-      </time>
-    </div>
-
-    <div class="query__sql-body">
-      <div class="query__db">
-        <%= query.database  %>
-      </div>
-
-      <pre>
-        <code>
-<%= query.body.strip %>
-        </code>
-      </pre>
-    </div>
-
-    <% fields = JSON.parse(query.fields) %>
-    <% results = JSON.parse(query.result) %>
-
-    <div class="query__results">
-      <table>
-        <thead>
-          <tr>
-            <% fields.each do |field| %>
-              <th>
-                <%= field %>
-              </th>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <% results.first(10).each do |values| %>
-            <tr>
-              <% values.each do |value| %>
-                <td>
-                  <%= value  %>
-                </td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-
-    <% if results.size > 10 %>
-      <div class="query__total-results">
-        Total results: <%= results.size  %>
-      </div>
-    <% end %>
-  </div>
-<% end %>
-
-
-
+<%= react_component("QueryList", queries: @db_queries.to_json) %>

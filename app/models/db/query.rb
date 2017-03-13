@@ -3,6 +3,15 @@ class Db::Query < ApplicationRecord
 
   delegate :database, to: :db_connection
 
+  def as_json(options = {})
+    super.merge(
+      created_at: created_at.strftime("%d %b %Y %H:%M"),
+      database: database,
+      fields: JSON.parse(fields),
+      results: JSON.parse(result)
+    )
+  end
+
   def run
     t1 = Time.current
     response = db_connection.connector.query(body)
