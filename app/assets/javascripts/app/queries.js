@@ -1,6 +1,7 @@
 $(function() {
   var $queryForm = $(".new_db_query");
   var $toggleLink = $(".js-toggle-query-form");
+  var editor = ace.edit("query-editor");
 
   $queryForm.on("submit", function(e) {
     e.preventDefault();
@@ -13,7 +14,13 @@ $(function() {
 
     App.query.run(dbConnectionId, sqlBody, description);
 
+    $this[0].reset();
+
+    editor.getSession().setValue("", 0);
+
     // TODO: show spinner when query is running and close form from React Component
-    $toggleLink.click();
+    setTimeout(function() {
+      $toggleLink.click();
+    }, 300);
   });
 });
