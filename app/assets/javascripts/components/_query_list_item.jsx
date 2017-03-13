@@ -2,8 +2,14 @@ class QueryListItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      queryId: this.props.queryId
     };
+  }
+
+  componentDidMount() {
+    let $queryCode = $(".query[data-query-id=" + this.state.queryId + "] code").each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
   }
 
   render() {
@@ -26,7 +32,7 @@ class QueryListItem extends React.Component {
     });
 
     return (
-      <div className="query">
+      <div className="query" data-query-id={query.id}>
         <div className="query__description">
           { query.description }
           <time>
