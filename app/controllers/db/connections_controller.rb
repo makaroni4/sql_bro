@@ -20,7 +20,7 @@ class Db::ConnectionsController < ApplicationController
 
     respond_to do |format|
       if @db_connection.save
-        format.html { redirect_to @db_connection, notice: 'Connection was successfully created.' }
+        format.html { redirect_to action: :index, notice: 'Connection was successfully created.' }
         format.json { render :show, status: :created, location: @db_connection }
       else
         format.html { render :new }
@@ -32,7 +32,7 @@ class Db::ConnectionsController < ApplicationController
   def update
     respond_to do |format|
       if @db_connection.update(db_connection_params)
-        format.html { redirect_to @db_connection, notice: 'Connection was successfully updated.' }
+        format.html { redirect_to action: :index, notice: 'Connection was successfully updated.' }
         format.json { render :show, status: :ok, location: @db_connection }
       else
         format.html { render :edit }

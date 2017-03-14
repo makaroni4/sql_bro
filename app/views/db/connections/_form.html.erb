@@ -17,7 +17,7 @@
     <div class="form-group">
       <%= f.label :adapter, class: "col-lg-2 control-label" %>
       <div class="col-lg-5">
-        <%= f.text_field :adapter, class: "form-control" %>
+        <%= f.select :adapter, Db::Connection::AVAILABLE_ADAPTERS, {}, class: "form-control" %>
       </div>
     </div>
 
