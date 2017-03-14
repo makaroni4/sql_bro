@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "db/queries#index"
+  root to: redirect("db/queries")
 
   namespace :db do
     resources :queries
