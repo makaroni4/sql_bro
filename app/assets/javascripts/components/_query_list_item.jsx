@@ -41,7 +41,8 @@ class QueryListItem extends React.Component {
         </div>
 
         <div className="query__sql-body">
-          <div className="query__db">
+          <div className="query__db label label-default">
+            <i className="fa fa-database"></i>
             { query.database }
           </div>
 
