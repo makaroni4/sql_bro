@@ -1,14 +1,20 @@
 $(function() {
   var $link = $(".js-toggle-query-form");
-  var $queryForm = $(".query-form");
+  var $queryFormContainer = $(".query-form-container");
+  var $closeIcon = $(".js-close-query-form");
 
   $link.on("click", function(e) {
     e.preventDefault();
 
-    $queryForm.toggle();
-    $link.text(function(i, text){
-      return text === "New Query" ? "^ Hide" : "New Query";
-    })
+    $queryFormContainer.toggle();
+    $link.toggle();
+  });
+
+  $closeIcon.on("click", function(e) {
+    e.preventDefault();
+
+    $queryFormContainer.toggle();
+    $link.toggle();
   });
 });
 

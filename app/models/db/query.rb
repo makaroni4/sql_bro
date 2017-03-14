@@ -1,7 +1,7 @@
 class Db::Query < ApplicationRecord
-  belongs_to :db_connection, class_name: Db::Connection
+  belongs_to :connection, foreign_key: :db_connection_id
 
-  delegate :database, to: :db_connection
+  delegate :database, to: :connection
 
   def as_json(options = {})
     super.merge(
@@ -14,7 +14,7 @@ class Db::Query < ApplicationRecord
 
   def run
     t1 = Time.current
-    response = db_connection.connector.query(body)
+    response = connection.connector.query(body)
 
     self.fields = response[:fields].to_json
     self.result = response[:result].to_json

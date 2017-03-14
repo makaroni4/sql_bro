@@ -5,7 +5,8 @@ $(function() {
   editor.setOptions({
     enableBasicAutocompletion: false,
     enableLiveAutocompletion: false,
-    enableSnippets: false
+    enableSnippets: false,
+    highlightActiveLine: false
   });
 
   var $textarea = $("#db_query_body");

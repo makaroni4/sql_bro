@@ -3,7 +3,8 @@ class Db::QueriesController < ApplicationController
 
   def index
     @db_queries = Db::Query.order(created_at: :desc).limit(5)
-    @db_query = Db::Query.new
+    db_connection = Db::Connection.first
+    @db_query = db_connection.queries.build
   end
 
   def show

@@ -1,4 +1,4 @@
-<%= form_for(db_query) do |f| %>
+<%= form_for db_query, html: { class: "query-form form" } do |f| %>
   <% if db_query.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(db_query.errors.count, "error") %> prohibited this db_query from being saved:</h2>
@@ -11,24 +11,38 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+  <div class="form-group">
+    <%= f.text_field :description, class: "form-control", placeholder: "Description", required: true %>
   </div>
 
-  <div class="field">
-    <%= f.label :body %>
-    <%= f.hidden_field :body %>
+  <%= f.hidden_field :body %>
+  <%= f.hidden_field :db_connection_id %>
+
+  <div class="query-form__editor form-group">
     <div id="query-editor">
+    </div>
+
+    <div class="btn-group query-form__db-connection">
+      <a href="#" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+        <%= fa_icon "database" %>
+        <span class="js-db-connection-selected">
+          <%= db_query.database %>
+        </span>
+      </a>
+
+      <ul class="dropdown-menu">
+        <% Db::Connection.find_each do |db_connection| %>
+          <li>
+            <%= link_to "#", class: "js-db-connection-select", data: { connection_id: db_connection.id } do %>
+              <%= "#{db_connection.adapter}: #{db_connection.database}" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 
-  <div class="field">
-    <%= f.label :db_connection_id %>
-    <%= f.select :db_connection_id, Db::Connection.all.map { |c| ["#{c.adapter}: #{c.database}", c.id] } %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Run query", class: "js-run-query", data: { disable_with: false } %>
+  <div class="form-group">
+    <%= f.submit "Run query", class: "btn btn-primary btn-sm js-run-query", data: { disable_with: false } %>
   </div>
 <% end %>
