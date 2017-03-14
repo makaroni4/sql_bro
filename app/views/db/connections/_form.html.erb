@@ -1,52 +1,72 @@
-<%= form_for(db_connection) do |f| %>
-  <% if db_connection.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(db_connection.errors.count, "error") %> prohibited this db_connection from being saved:</h2>
+<%= form_for db_connection, html: { class: "form-horizontal" } do |f| %>
+  <fieldset>
+    <legend><%= legend %></legend>
 
-      <ul>
-      <% db_connection.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if db_connection.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(db_connection.errors.count, "error") %> prohibited this db_connection from being saved:</h2>
+
+        <ul>
+        <% db_connection.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :adapter, class: "col-lg-2 control-label" %>
+      <div class="col-lg-5">
+        <%= f.text_field :adapter, class: "form-control" %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :adapter %>
-    <%= f.text_field :adapter %>
-  </div>
+    <div class="form-group">
+      <%= f.label :user, class: "col-lg-2 control-label" %>
+      <div class="col-lg-5">
+        <%= f.text_field :user, class: "form-control" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :user %>
-    <%= f.text_field :user %>
-  </div>
+    <div class="form-group">
+      <%= f.label :password, class: "col-lg-2 control-label" %>
+      <div class="col-lg-5">
+        <%= f.text_field :password, class: "form-control" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.text_field :password %>
-  </div>
+    <div class="form-group">
+      <%= f.label :host, class: "col-lg-2 control-label" %>
+      <div class="col-lg-5">
+        <%= f.text_field :host, class: "form-control" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :host %>
-    <%= f.text_field :host %>
-  </div>
+    <div class="form-group">
+      <%= f.label :encoding, class: "col-lg-2 control-label" %>
+      <div class="col-lg-5">
+        <%= f.text_field :encoding, class: "form-control" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :encoding %>
-    <%= f.text_field :encoding %>
-  </div>
+    <div class="form-group">
+      <%= f.label :timeout, class: "col-lg-2 control-label" %>
+      <div class="col-lg-5">
+        <%= f.number_field :timeout, class: "form-control" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :timeout %>
-    <%= f.number_field :timeout %>
-  </div>
+    <div class="form-group">
+      <%= f.label :database, class: "col-lg-2 control-label" %>
+      <div class="col-lg-5">
+        <%= f.text_field :database, class: "form-control" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :database %>
-    <%= f.text_field :database %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="form-group">
+      <div class="col-lg-5 col-lg-offset-2">
+        <%= f.submit class: "btn btn-primary btn-sm" %>
+      </div>
+    </div>
+  </fieldset>
 <% end %>
