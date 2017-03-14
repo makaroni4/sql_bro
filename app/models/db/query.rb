@@ -1,7 +1,7 @@
 class Db::Query < ApplicationRecord
   belongs_to :connection, foreign_key: :db_connection_id
 
-  delegate :database, to: :connection
+  delegate :adapter, :database, to: :connection
 
   def as_json(options = {})
     super.merge(

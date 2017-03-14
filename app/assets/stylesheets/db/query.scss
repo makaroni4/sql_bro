@@ -3,6 +3,7 @@
   padding: 0 10px 10px;
 
   border: 1px solid #F1F1F1;
+  border-radius: 2px;
 
   &__db {
     position: absolute;
@@ -36,11 +37,13 @@
     position: relative;
     margin-top: 10px;
 
-    border-radius: 2px;
-
     pre {
       display: flex;
       padding: 10px;
+
+      border-radius: 2px;
+
+      background-color: #F0F0F0;
 
       &:first-line {
         line-height: 0px;

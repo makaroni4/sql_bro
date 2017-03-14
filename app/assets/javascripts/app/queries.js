@@ -1,5 +1,5 @@
 $(function() {
-  var $queryForm = $(".new_db_query");
+  var $queryForm = $("#new_db_query");
   var $toggleLink = $(".js-toggle-query-form");
   var editor = ace.edit("query-editor");
 

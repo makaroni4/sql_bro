@@ -26,7 +26,7 @@
       <a href="#" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
         <%= fa_icon "database" %>
         <span class="js-db-connection-selected">
-          <%= db_query.database %>
+          <%= "#{db_query.adapter}: #{db_query.database}" %>
         </span>
       </a>
 
