@@ -5,5 +5,5 @@
 (function() {
   this.App || (this.App = {});
 
-  App.cable = ActionCable.createConsumer("ws://localhost:3000/websocket");
+  App.cable = ActionCable.createConsumer("ws://" + window.location.host + "/websocket");
 }).call(this);
