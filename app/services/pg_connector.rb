@@ -13,7 +13,7 @@ class PgConnector < Struct.new(:db_connection_id)
   def connection
     db_connection = Db::Connection.find(db_connection_id)
 
-    connection_attributes = db_connection.slice("user", "password", "host")
+    connection_attributes = db_connection.slice("user", "password", "host", "port")
     connection_attributes["dbname"] = db_connection.database
     connection_attributes["connect_timeout"] = db_connection.timeout
 

@@ -1,4 +1,4 @@
-<%= form_for db_connection, html: { class: "form-horizontal" } do |f| %>
+<%= form_for db_connection, html: { class: "form-horizontal", data: { default_ports: Db::Connection::DEFAULT_PORTS.to_json } } do |f| %>
   <fieldset>
     <legend><%= legend %></legend>
 
@@ -37,8 +37,11 @@
 
     <div class="form-group">
       <%= f.label :host, class: "col-lg-2 control-label" %>
-      <div class="col-lg-5">
+      <div class="col-lg-4">
         <%= f.text_field :host, class: "form-control" %>
+      </div>
+      <div class="col-lg-1">
+        <%= f.text_field :port, class: "form-control" %>
       </div>
     </div>
 

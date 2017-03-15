@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20170310080315) do
     t.string   "user"
     t.string   "password"
     t.string   "host"
+    t.integer  "port"
     t.string   "encoding"
     t.integer  "timeout"
     t.string   "database"

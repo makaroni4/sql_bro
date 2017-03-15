@@ -5,6 +5,7 @@ class CreateDbConnections < ActiveRecord::Migration[5.0]
       t.string :user
       t.string :password
       t.string :host
+      t.integer :port
       t.string :encoding
       t.integer :timeout
       t.string :database

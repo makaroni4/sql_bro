@@ -13,7 +13,7 @@ class MysqlConnector < Struct.new(:db_connection_id)
   def connection
     db_connection = Db::Connection.find(db_connection_id)
 
-    connection_attributes = db_connection.slice("user", "password", "host", "database", "timeout")
+    connection_attributes = db_connection.slice("user", "password", "host", "database", "timeout", "port")
 
     @connection = Mysql2::Client.new(connection_attributes)
   end

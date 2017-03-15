@@ -1,5 +1,10 @@
 $(function() {
+  if($("#query-editor").length < 1) {
+    return;
+  }
+
   var editor = ace.edit("query-editor");
+
   editor.setTheme("ace/theme/monokai");
   editor.getSession().setMode("ace/mode/sql");
   editor.setOptions({
