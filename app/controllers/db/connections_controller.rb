@@ -55,6 +55,6 @@ class Db::ConnectionsController < ApplicationController
     end
 
     def db_connection_params
-      params.require(:db_connection).permit(:adapter, :user, :password, :host, :encoding, :timeout, :database)
+      params.require(:db_connection).permit(:adapter, :user, :password, :host, :timeout, :database)
     end
 end

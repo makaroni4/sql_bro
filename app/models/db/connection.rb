@@ -8,7 +8,7 @@ class Db::Connection < ApplicationRecord
     mysql: 3306
   }.with_indifferent_access
 
-  before_validation :set_port, on: :create
+  before_validation :set_defaults, on: :create
 
   validates :adapter, inclusion: { in: AVAILABLE_ADAPTERS }
   validates :port, presence: true
@@ -28,7 +28,9 @@ class Db::Connection < ApplicationRecord
 
   private
 
-  def set_port
+  def set_defaults
     self.port ||= DEFAULT_PORTS[adapter]
+    self.host ||= "localhost"
+    self.timeout ||= 5000
   end
 end
