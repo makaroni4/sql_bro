@@ -15,59 +15,59 @@
     <% end %>
 
     <div class="form-group">
-      <%= f.label :adapter, class: "col-lg-2 control-label" %>
-      <div class="col-lg-5">
+      <%= f.label :adapter, class: "col-sm-2 control-label" %>
+      <div class="col-sm-5">
         <%= f.select :adapter, Db::Connection::AVAILABLE_ADAPTERS, {}, class: "form-control" %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :user, class: "col-lg-2 control-label" %>
-      <div class="col-lg-5">
-        <%= f.text_field :user, class: "form-control" %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password, class: "col-lg-2 control-label" %>
-      <div class="col-lg-5">
-        <%= f.password_field :password, class: "form-control" %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :host, class: "col-lg-2 control-label" %>
-      <div class="col-lg-4">
-        <%= f.text_field :host, class: "form-control" %>
-      </div>
-      <div class="col-lg-1">
-        <%= f.text_field :port, class: "form-control" %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :encoding, class: "col-lg-2 control-label" %>
-      <div class="col-lg-5">
-        <%= f.text_field :encoding, class: "form-control" %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :timeout, class: "col-lg-2 control-label" %>
-      <div class="col-lg-5">
-        <%= f.number_field :timeout, class: "form-control" %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :database, class: "col-lg-2 control-label" %>
-      <div class="col-lg-5">
+      <%= f.label :database, class: "col-sm-2 control-label" %>
+      <div class="col-sm-5">
         <%= f.text_field :database, class: "form-control" %>
       </div>
     </div>
 
     <div class="form-group">
-      <div class="col-lg-5 col-lg-offset-2">
+      <%= f.label :user, class: "col-sm-2 control-label" %>
+      <div class="col-sm-5">
+        <%= f.text_field :user, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password, class: "col-sm-2 control-label" %>
+      <div class="col-sm-5">
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :host, class: "col-sm-2 control-label" %>
+      <div class="col-sm-4">
+        <%= f.text_field :host, class: "form-control" %>
+      </div>
+      <div class="col-sm-1">
+        <%= f.text_field :port, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :encoding, class: "col-sm-2 control-label" %>
+      <div class="col-sm-5">
+        <%= f.text_field :encoding, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :timeout, class: "col-sm-2 control-label" %>
+      <div class="col-sm-5">
+        <%= f.number_field :timeout, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-5 col-sm-offset-2">
         <%= f.submit class: "btn btn-primary btn-sm" %>
       </div>
     </div>

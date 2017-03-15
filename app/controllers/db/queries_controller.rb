@@ -1,4 +1,5 @@
 class Db::QueriesController < ApplicationController
+  before_action :check_db_connection_exist, only: :index
   before_action :set_db_query, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -58,5 +59,9 @@ class Db::QueriesController < ApplicationController
 
     def db_query_params
       params.require(:db_query).permit(:body, :db_connection_id, :description)
+    end
+
+    def check_db_connection_exist
+      redirect_to new_db_connection_path unless Db::Connection.any?
     end
 end
