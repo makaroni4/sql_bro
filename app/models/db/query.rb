@@ -3,6 +3,8 @@ class Db::Query < ApplicationRecord
 
   delegate :adapter, :database, to: :connection
 
+  validates :body, :connection, :fields, :result, :duration, presence: true
+
   def as_json(options = {})
     super.merge(
       created_at: created_at.strftime("%d %b %Y %H:%M"),
