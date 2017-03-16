@@ -18,14 +18,5 @@ $(function() {
     var sqlBody = $(this).find("#db_query_body").val();
 
     App.query.run(dbConnectionId, sqlBody, description);
-
-    $this[0].reset();
-
-    editor.getSession().setValue("", 0);
-
-    // TODO: show spinner when query is running and close form from React Component
-    setTimeout(function() {
-      $toggleLink.click();
-    }, 300);
   });
 });

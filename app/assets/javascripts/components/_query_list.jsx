@@ -7,7 +7,6 @@ class QueryList extends React.Component {
   }
 
   insertNewQuery(query) {
-    query = JSON.parse(query);
     this.setState({
       queries: [query].concat(this.state.queries)
     });
@@ -23,7 +22,18 @@ class QueryList extends React.Component {
         });
       },
       received: function(query) {
-        this.insertNewQuery(query);
+        query = JSON.parse(query);
+
+        var $queryForm = $(".query-form");
+        var $queryFormErrorContainer = $queryForm.find(".query-form__error");
+
+        if(query.error) {
+          $queryFormErrorContainer.text(query.error);
+          $queryFormErrorContainer.show();
+        } else {
+          this.insertNewQuery(query);
+          $queryFormErrorContainer.hide();
+        }
       }.bind(this)
     });
   }

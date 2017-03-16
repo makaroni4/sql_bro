@@ -13,5 +13,7 @@ class QueryChannel < ApplicationCable::Channel
     db_query.run
 
     ActionCable.server.broadcast "query_channel_#{current_user}", db_query.to_json
+  rescue Exception => e
+    ActionCable.server.broadcast "query_channel_#{current_user}", { error: e.message }.to_json
   end
 end

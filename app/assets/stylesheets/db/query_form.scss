@@ -13,4 +13,10 @@
     right: 10px;
     z-index: 1000;
   }
+
+  &__error {
+    display: none;
+
+    color: #e51c23;
+  }
 }

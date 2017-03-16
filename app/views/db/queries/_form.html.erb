@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.text_field :description, class: "form-control", placeholder: "Description", required: true %>
+    <%= f.text_field :description, class: "form-control", placeholder: "Description" %>
   </div>
 
   <%= f.hidden_field :body %>
@@ -39,6 +39,11 @@
           </li>
         <% end %>
       </ul>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="query-form__error well">
     </div>
   </div>
 
