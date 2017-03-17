@@ -28,6 +28,9 @@ class QueryList extends React.Component {
         var $submitButton = $queryForm.find(".js-run-query");
         var $queryFormErrorContainer = $queryForm.find(".query-form__error");
 
+        var $formContainer = $queryForm.parent(".query-form-container");
+        var $formOverlay = $formContainer.find(".query-form__active-overlay")
+
         if(query.error) {
           $queryFormErrorContainer.text(query.error);
           $queryFormErrorContainer.show();
@@ -36,6 +39,7 @@ class QueryList extends React.Component {
           $queryFormErrorContainer.hide();
         }
 
+        $formOverlay.removeClass("query-form__active-overlay--active");
         $submitButton.prop("disabled", false);
       }.bind(this)
     });

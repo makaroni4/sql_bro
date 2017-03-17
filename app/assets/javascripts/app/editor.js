@@ -11,7 +11,8 @@ $(function() {
     enableBasicAutocompletion: false,
     enableLiveAutocompletion: false,
     enableSnippets: false,
-    highlightActiveLine: false
+    highlightActiveLine: false,
+    theme: "ace/theme/textmate"
   });
 
   var $textarea = $("#db_query_body");

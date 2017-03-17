@@ -7,6 +7,32 @@
     position: relative;
   }
 
+  &__active-overlay {
+    display: none;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5000;
+
+    background-color: rgba(160, 160, 160, 0.2);
+
+    &--active {
+      display: flex;
+    }
+  }
+
+  &__active-spinner {
+    width: 100px;
+    height: 100px;
+
+    background-image: asset-url("editor/spinner.gif");
+    background-size: cover;
+  }
+
   &__db-connection {
     position: absolute;
     top: 10px;
