@@ -46,7 +46,11 @@
     color: #e51c23;
   }
 
-  &__hide-link {
-    margin-left: 8px;
+  &__action-link {
+    margin-left: 14px;
+
+    i {
+      margin-left: 4px;
+    }
   }
 }

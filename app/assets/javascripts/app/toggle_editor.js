@@ -3,6 +3,8 @@ $(function() {
   var $queryFormContainer = $(".query-form-container");
   var $closeIcon = $(".js-close-query-form");
   var editor = ace.edit("query-editor");
+  var $queryForm = $("#new_db_query");
+  var $clearLink = $queryForm.find(".js-clear-query-form");
 
   $link.on("click", function(e) {
     e.preventDefault();
@@ -20,6 +22,14 @@ $(function() {
 
     $queryFormContainer.toggle();
     $link.toggle();
+  });
+
+  $clearLink.on("click", function(e) {
+    e.preventDefault();
+
+    $queryForm[0].reset();
+    editor.setValue("");
+    editor.focus();
   });
 });
 

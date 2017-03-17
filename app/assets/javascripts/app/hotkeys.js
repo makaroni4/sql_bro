@@ -42,4 +42,18 @@ $(function() {
   $(document).on("keydown", null, "Ctrl+return", function(e) {
     submitQueryForm();
   });
+
+  var $clearLink = $queryForm.find(".js-clear-query-form");
+
+  editor.commands.addCommand({
+    name: "clearQueryForm",
+    bindKey: {win: "Ctrl-c", mac: "Ctrl-c"},
+    exec: function(editor) {
+      $clearLink.click();
+    }
+  });
+
+  $(document).on("keydown", null, "Ctrl+c", function(e) {
+    $clearLink.click();
+  });
 });

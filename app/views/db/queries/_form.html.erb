@@ -55,6 +55,14 @@
   <div class="form-group">
     <%= f.submit "Run query", class: "btn btn-primary btn-sm js-run-query", data: { disable_with: false } %>
 
-    <%= link_to "Hide", "#" , class: "query-form__hide-link js-close-query-form" %>
+    <%= link_to "#" , class: "btn btn-default btn-sm query-form__action-link js-clear-query-form" do %>
+      Clear
+    <% end %>
+
+
+    <%= link_to "#" , class: "btn btn-default btn-sm query-form__action-link js-close-query-form" do %>
+      Close
+      <%= fa_icon "close" %>
+    <% end %>
   </div>
 <% end %>
