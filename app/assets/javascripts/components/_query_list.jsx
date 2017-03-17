@@ -25,6 +25,7 @@ class QueryList extends React.Component {
         query = JSON.parse(query);
 
         var $queryForm = $(".query-form");
+        var $submitButton = $queryForm.find(".js-run-query");
         var $queryFormErrorContainer = $queryForm.find(".query-form__error");
 
         if(query.error) {
@@ -34,6 +35,8 @@ class QueryList extends React.Component {
           this.insertNewQuery(query);
           $queryFormErrorContainer.hide();
         }
+
+        $submitButton.prop("disabled", false);
       }.bind(this)
     });
   }

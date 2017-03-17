@@ -7,11 +7,14 @@ $(function() {
 
   var $toggleLink = $(".js-toggle-query-form");
   var editor = ace.edit("query-editor");
+  var $submitButton = $queryForm.find(".js-run-query");
 
   $queryForm.on("submit", function(e) {
     e.preventDefault();
 
     var $this = $(this);
+
+    $submitButton.prop("disabled", true);
 
     var dbConnectionId = $(this).find("#db_query_db_connection_id").val();
     var description = $(this).find("#db_query_description").val();
