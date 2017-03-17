@@ -27,6 +27,8 @@ class QueryListItem extends React.Component {
       });
     };
 
+    let totalResults = query.results.length;
+
     let results = query.results.slice(0, 10).map(function(values) {
       return <tr>{tableRow(values)}</tr>;
     });
@@ -66,7 +68,7 @@ class QueryListItem extends React.Component {
           </table>
         </div>
 
-        { query.result.length > 10 &&
+        { totalResults > 10 &&
           <div className="query__total-results">
             Total results: { query.results.length }
           </div>
