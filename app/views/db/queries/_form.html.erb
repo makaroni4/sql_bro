@@ -49,5 +49,7 @@
 
   <div class="form-group">
     <%= f.submit "Run query", class: "btn btn-primary btn-sm js-run-query", data: { disable_with: false } %>
+
+    <%= link_to "Hide", "#" , class: "query-form__hide-link js-close-query-form" %>
   </div>
 <% end %>
