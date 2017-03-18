@@ -7,9 +7,12 @@ class QueryListItem extends React.Component {
   }
 
   componentDidMount() {
-    let $queryCode = $(".query[data-query-id=" + this.state.queryId + "] code").each(function(i, block) {
+    var $queryBlock = $(".query[data-query-id=" + this.state.queryId + "]");
+    let $queryCode = $queryBlock.find("code").each(function(i, block) {
       hljs.highlightBlock(block);
     });
+
+    $queryBlock.find("table").dragtable();
   }
 
   render() {
