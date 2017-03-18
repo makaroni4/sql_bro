@@ -9,7 +9,7 @@ class PgConnector < Struct.new(:db_connection_id)
   end
 
   def store_columns_info
-    columns = connection.exec <<-SQL
+    columns_info = connection.exec <<-SQL
       WITH tables AS (
         SELECT
           table_schema,
@@ -29,7 +29,7 @@ class PgConnector < Struct.new(:db_connection_id)
           AND c.table_name = t.table_name
     SQL
 
-    schemas_tables = columns.values.group_by(&:first)
+    schemas_tables = columns_info.values.group_by(&:first)
 
     schemas_tables.each do |schema_name, tables|
       next unless tables.any?
