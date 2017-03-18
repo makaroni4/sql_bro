@@ -52,6 +52,14 @@ class Db::QueriesController < ApplicationController
     end
   end
 
+  def autocomplete
+    respond_to do |format|
+      format.json do
+        render json: [].to_json
+      end
+    end
+  end
+
   private
     def set_db_query
       @db_query = Db::Query.find(params[:id])
