@@ -12,7 +12,17 @@ class QueryListItem extends React.Component {
       hljs.highlightBlock(block);
     });
 
-    $queryBlock.find("table").dragtable();
+    var $queryResultTable = $queryBlock.find("table");
+    $queryResultTable.dragtable();
+    $queryResultTable.find("th,tr,td").resizable({
+      handles: "n, s",
+      create: function(e, ui) {
+        $(".ui-resizable-n,.ui-resizable-s").css("cursor", "row-resize");
+      }
+    });
+    $queryResultTable.colResizable({
+      resizeMode: "overflow"
+    });
   }
 
   render() {

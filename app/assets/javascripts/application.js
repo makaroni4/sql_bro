@@ -7,5 +7,6 @@
 //= require bootstrap/dropdown
 //= require jquery.hotkeys
 //= require jquery.dragtable
+//= require jquery.colresizable
 //= require_tree ./app
 //= require cable

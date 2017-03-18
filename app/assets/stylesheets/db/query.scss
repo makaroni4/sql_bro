@@ -63,10 +63,17 @@
 
     table {
       border-collapse: collapse;
+
+      table-layout: fixed;
     }
 
     td {
+      max-width: 200px;
       padding: 2px 4px;
+      overflow: hidden;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     th {

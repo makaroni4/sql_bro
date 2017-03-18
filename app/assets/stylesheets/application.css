@@ -12,6 +12,7 @@
  *
  *= require theme
  *= require dragtable
+ *= require jquery.ui
  *= require font-awesome
  *= require_tree .
  *= require_self
