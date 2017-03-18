@@ -10,7 +10,7 @@ $(function() {
   editor.setOptions({
     enableBasicAutocompletion: true,
     enableLiveAutocompletion: true,
-    enableSnippets: true,
+    enableSnippets: false,
     highlightActiveLine: false,
     theme: "ace/theme/textmate"
   });
@@ -20,24 +20,22 @@ $(function() {
       if (prefix.length === 0) { callback(null, []); return }
 
       var dbConnectionId = $("#db_query_db_connection_id").val();
+      var url = "/db/queries/autocomplete?q=" + prefix + "&db_connection_id=" + dbConnectionId;
 
-      $.getJSON(
-        "/db/queries/autocomplete?q=" + prefix + "&db_connection_id=" + dbConnectionId,
-        function(wordList) {
-          callback(null, wordList.map(function(ea) {
-              return {
-                name: ea.word,
-                value: ea.word,
-                score: ea.score,
-                meta: ea.meta
-              }
-          }));
-        }
-      )
+      $.getJSON(url, function(wordList) {
+        callback(null, wordList.map(function(ea) {
+          return {
+            name: ea.word,
+            value: ea.word,
+            score: ea.score,
+            meta: ea.meta
+          }
+        }));
+      });
     }
   }
 
-  editor.completers = [queryAutoCompleter];
+  editor.completers.push(queryAutoCompleter);
 
   var $textarea = $("#db_query_body");
   editor.getSession().setValue($textarea.val());

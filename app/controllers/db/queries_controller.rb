@@ -53,9 +53,11 @@ class Db::QueriesController < ApplicationController
   end
 
   def autocomplete
+    autocomplete = QueryAutocomplete.new(params[:db_connection_id])
+
     respond_to do |format|
       format.json do
-        render json: [].to_json
+        render json: autocomplete.suggest(params[:q]).to_json
       end
     end
   end
