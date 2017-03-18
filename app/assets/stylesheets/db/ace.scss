@@ -1,6 +1,13 @@
 .ace_editor.ace_autocomplete {
   box-shadow: none;
 
+  .ace_marker-layer {
+    .ace_active-line {
+      background-color: #0d87e9;
+      opacity: 0.3;
+    }
+  }
+
   .ace_completion-highlight {
     font-weight: bold;
     text-shadow: none;
