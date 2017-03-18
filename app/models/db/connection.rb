@@ -1,5 +1,6 @@
 class Db::Connection < ApplicationRecord
   has_many :queries, foreign_key: :db_connection_id
+  has_many :schemas, foreign_key: :db_connection_id
 
   AVAILABLE_ADAPTERS = %w(pg mysql redshift)
   DEFAULT_PORTS = {

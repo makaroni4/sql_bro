@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170310080315) do
+ActiveRecord::Schema.define(version: 20170318200353) do
+
+  create_table "db_columns", force: :cascade do |t|
+    t.integer  "db_table_id"
+    t.string   "name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["db_table_id", "name"], name: "index_db_columns_on_db_table_id_and_name", unique: true
+    t.index ["db_table_id"], name: "index_db_columns_on_db_table_id"
+  end
 
   create_table "db_connections", force: :cascade do |t|
     t.string   "adapter"
@@ -34,6 +43,24 @@ ActiveRecord::Schema.define(version: 20170310080315) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["db_connection_id"], name: "index_db_queries_on_db_connection_id"
+  end
+
+  create_table "db_schemas", force: :cascade do |t|
+    t.integer  "db_connection_id"
+    t.string   "name"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["db_connection_id", "name"], name: "index_db_schemas_on_db_connection_id_and_name", unique: true
+    t.index ["db_connection_id"], name: "index_db_schemas_on_db_connection_id"
+  end
+
+  create_table "db_tables", force: :cascade do |t|
+    t.integer  "db_schema_id"
+    t.string   "name"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["db_schema_id", "name"], name: "index_db_tables_on_db_schema_id_and_name", unique: true
+    t.index ["db_schema_id"], name: "index_db_tables_on_db_schema_id"
   end
 
 end
