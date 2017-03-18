@@ -1,4 +1,4 @@
-class PgConnector < Struct.new(:db_connection_id)
+class PgConnector < DbConnector
   def query(query)
     result = connection.exec(query)
 
@@ -29,31 +29,10 @@ class PgConnector < Struct.new(:db_connection_id)
           AND c.table_name = t.table_name
     SQL
 
-    schemas_tables = columns_info.values.group_by(&:first)
-
-    schemas_tables.each do |schema_name, tables|
-      next unless tables.any?
-
-      schema = db_connection.schemas.find_or_create_by!(name: schema_name)
-      tables_columns = tables.group_by(&:second)
-
-      tables_columns.each do |table_name, columns|
-        next unless columns.any?
-
-        table = schema.tables.find_or_create_by!(name: table_name)
-
-        columns.each do |_, _, column_name|
-          table.columns.find_or_create_by!(name: column_name)
-        end
-      end
-    end
+    persist_columns_info(columns_info.values)
   end
 
   private
-
-  def db_connection
-    @db_connection ||= Db::Connection.find(db_connection_id)
-  end
 
   def connection
     connection_attributes = db_connection.slice("user", "password", "host", "port")
