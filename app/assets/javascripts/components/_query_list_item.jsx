@@ -4,10 +4,12 @@ class QueryListItem extends React.Component {
     this.state = {
       queryId: this.props.queryId
     };
+    this.DEFAULT_QUERY_DESCRIPTION = "<span class='query__description--default'>Description</span>";
   }
 
   componentDidMount() {
-    var queryId = this.state.queryId;
+    var that = this;
+    var queryId = that.state.queryId;
     var $queryBlock = $(".query[data-query-id=" + queryId + "]");
     let $queryCode = $queryBlock.find("code").each(function(i, block) {
       hljs.highlightBlock(block);
@@ -26,16 +28,26 @@ class QueryListItem extends React.Component {
     });
 
     var $queryDescription = $queryBlock.find(".query__description");
+    if(!$queryDescription.text()) {
+      $queryDescription.html(that.DEFAULT_QUERY_DESCRIPTION);
+    }
+
     $queryDescription.on("blur", function() {
+      var $this = $(this);
+
       $.ajax({
         method: "PATCH",
         url: "/db/queries/" + queryId,
         data: {
           db_query: {
-            description: $(this).html()
+            description: $this.html()
           }
         }
       });
+
+      if($this.text()) {
+        $this.html(that.DEFAULT_QUERY_DESCRIPTION);
+      }
     });
   }
 
@@ -54,6 +66,8 @@ class QueryListItem extends React.Component {
       });
     };
 
+    let queryDescription = query.description ? query.description : this.DEFAULT_QUERY_DESCRIPTION;
+
     let totalResults = query.results.length;
 
     let results = query.results.slice(0, 10).map(function(values) {
@@ -62,7 +76,7 @@ class QueryListItem extends React.Component {
 
     return (
       <div className="query" data-query-id={query.id}>
-        <div className="query__description" contentEditable="true" dangerouslySetInnerHTML={{__html: query.description}} >
+        <div className="query__description" contentEditable="true" dangerouslySetInnerHTML={{ __html: queryDescription }} >
         </div>
 
         <time className="query__time">
