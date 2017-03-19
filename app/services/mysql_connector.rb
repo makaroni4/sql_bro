@@ -41,7 +41,9 @@ class MysqlConnector < DbConnector
   private
 
   def connection
-    connection_attributes = db_connection.slice("user", "password", "host", "database", "timeout", "port")
+    connection_attributes = db_connection.slice("database", "host", "password", "timeout", "port")
+
+    connection_attributes["username"] = db_connection.user
 
     @connection = Mysql2::Client.new(connection_attributes)
   end
