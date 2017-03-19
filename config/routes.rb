@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :db do
     resources :queries do
       collection do
+        get :setup_autocomplete
         get :autocomplete
         get :cancel
       end

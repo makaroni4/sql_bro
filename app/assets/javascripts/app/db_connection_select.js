@@ -9,5 +9,7 @@ $(function() {
     var $this = $(this);
     $dbConnectionId.val($this.data("connectionId"));
     $currentDbConnection.text($this.text());
+
+    App.setupAutocomplete();
   });
 });

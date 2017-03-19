@@ -15,6 +15,8 @@ $(function() {
 
     if($queryFormContainer.is(":visible")) {
       editor.focus();
+
+      App.setupAutocomplete();
     }
   });
 

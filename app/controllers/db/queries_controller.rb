@@ -62,6 +62,17 @@ class Db::QueriesController < ApplicationController
     end
   end
 
+  def setup_autocomplete
+    connection = Db::Connection.find(params[:db_connection_id])
+    connection.connector.store_columns_info
+
+    respond_to do |format|
+      format.json do
+        head :ok
+      end
+    end
+  end
+
   def cancel
     connection = Db::Connection.find(db_query_params[:db_connection_id])
     connection.connector.cancel_query(db_query_params[:body])
