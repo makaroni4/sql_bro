@@ -21,6 +21,23 @@ class MysqlConnector < DbConnector
     persist_columns_info(columns_info.each(as: :array).to_a)
   end
 
+  def cancel_query(body)
+    result = connection.query <<-SQL
+      SELECT ID
+      FROM INFORMATION_SCHEMA.PROCESSLIST
+      WHERE
+          USER = '#{db_connection.user}'
+          AND DB = '#{db_connection.database}'
+          AND INFO = '#{body}'
+    SQL
+
+    result.each(as: :array).to_a.flatten.each do |id|
+      connection.query <<-SQL
+        KILL #{id}
+      SQL
+    end
+  end
+
   private
 
   def connection
