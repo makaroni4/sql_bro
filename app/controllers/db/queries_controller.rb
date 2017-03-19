@@ -62,6 +62,17 @@ class Db::QueriesController < ApplicationController
     end
   end
 
+  def cancel
+    connection = Db::Connection.find(db_query_params[:db_connection_id])
+    connection.connector.cancel_query(db_query_params[:body])
+
+    respond_to do |format|
+      format.json do
+        head :ok
+      end
+    end
+  end
+
   private
     def set_db_query
       @db_query = Db::Query.find(params[:id])

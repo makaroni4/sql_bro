@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :queries do
       collection do
         get :autocomplete
+        get :cancel
       end
     end
   end

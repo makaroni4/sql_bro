@@ -26,6 +26,7 @@ class QueryList extends React.Component {
 
         var $queryForm = $(".query-form");
         var $submitButton = $queryForm.find(".js-run-query");
+        var $cancelButton = $queryForm.find(".js-cancel-query");
         var $queryFormErrorContainer = $queryForm.find(".query-form__error");
 
         var $formContainer = $queryForm.parent(".query-form-container");
@@ -40,7 +41,8 @@ class QueryList extends React.Component {
         }
 
         $formOverlay.removeClass("query-form__active-overlay--active");
-        $submitButton.prop("disabled", false);
+        $submitButton.show();
+        $cancelButton.removeClass("query-form__cancel-button--active");
       }.bind(this)
     });
   }

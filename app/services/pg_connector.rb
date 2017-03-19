@@ -32,6 +32,22 @@ class PgConnector < DbConnector
     persist_columns_info(columns_info.values)
   end
 
+  def cancel_query(body)
+    result = connection.exec <<-SQL
+      SELECT pg_cancel_backend(pid)
+      FROM pg_stat_activity
+      WHERE
+        state = 'active'
+        AND query = '#{body}'
+        AND application_name = 'sql_bro'
+    SQL
+
+    return {
+      fields: result.fields,
+      result: result.values
+    }
+  end
+
   private
 
   def connection
@@ -41,6 +57,7 @@ class PgConnector < DbConnector
 
     @connection ||= PG.connect(connection_attributes)
     @connection.type_map_for_results = PG::BasicTypeMapForResults.new(@connection)
+    @connection.exec("SET application_name TO 'sql_bro'")
     @connection
   end
 end

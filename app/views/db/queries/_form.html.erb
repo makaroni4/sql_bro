@@ -55,6 +55,8 @@
   <div class="form-group">
     <%= f.submit "Run query", class: "btn btn-primary btn-sm js-run-query", data: { disable_with: false } %>
 
+    <%= link_to "Cancel query", "#", class: "query-form__cancel-button btn btn-danger btn-sm js-cancel-query" %>
+
     <%= link_to "#" , class: "btn btn-default btn-sm query-form__action-link js-clear-query-form" do %>
       Clear
     <% end %>
