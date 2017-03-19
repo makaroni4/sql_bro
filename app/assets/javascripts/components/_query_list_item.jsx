@@ -7,7 +7,8 @@ class QueryListItem extends React.Component {
   }
 
   componentDidMount() {
-    var $queryBlock = $(".query[data-query-id=" + this.state.queryId + "]");
+    var queryId = this.state.queryId;
+    var $queryBlock = $(".query[data-query-id=" + queryId + "]");
     let $queryCode = $queryBlock.find("code").each(function(i, block) {
       hljs.highlightBlock(block);
     });
@@ -22,6 +23,19 @@ class QueryListItem extends React.Component {
     });
     $queryResultTable.colResizable({
       resizeMode: "overflow"
+    });
+
+    var $queryDescription = $queryBlock.find(".query__description");
+    $queryDescription.on("blur", function() {
+      $.ajax({
+        method: "PATCH",
+        url: "/db/queries/" + queryId,
+        data: {
+          db_query: {
+            description: $(this).html()
+          }
+        }
+      });
     });
   }
 
@@ -48,12 +62,12 @@ class QueryListItem extends React.Component {
 
     return (
       <div className="query" data-query-id={query.id}>
-        <div className="query__description">
-          { query.description }
-          <time>
-            { query.created_at }
-          </time>
+        <div className="query__description" contentEditable="true" dangerouslySetInnerHTML={{__html: query.description}} >
         </div>
+
+        <time className="query__time">
+          { query.created_at }
+        </time>
 
         <div className="query__sql-body">
           <div className="query__db label label-default">
