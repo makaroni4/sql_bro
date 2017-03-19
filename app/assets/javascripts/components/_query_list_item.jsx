@@ -32,11 +32,16 @@ class QueryListItem extends React.Component {
       $queryDescription.html(that.DEFAULT_QUERY_DESCRIPTION);
     }
 
+    $queryDescription.on("focus", function() {
+      $(this).find(".query__description--default").remove();
+    });
+
     $queryDescription.on("blur", function() {
       var $this = $(this);
 
       $.ajax({
         method: "PATCH",
+        dataType: "json",
         url: "/db/queries/" + queryId,
         data: {
           db_query: {
@@ -45,7 +50,7 @@ class QueryListItem extends React.Component {
         }
       });
 
-      if($this.text()) {
+      if(!$this.text()) {
         $this.html(that.DEFAULT_QUERY_DESCRIPTION);
       }
     });

@@ -36,7 +36,7 @@ class Db::QueriesController < ApplicationController
     respond_to do |format|
       if @db_query.update(db_query_params)
         format.html { redirect_to @db_query, notice: 'Query was successfully updated.' }
-        format.json { render :show, status: :ok, location: @db_query }
+        format.json { head :ok }
       else
         format.html { render :edit }
         format.json { render json: @db_query.errors, status: :unprocessable_entity }
