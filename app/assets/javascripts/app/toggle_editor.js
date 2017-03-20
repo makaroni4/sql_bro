@@ -1,5 +1,10 @@
 $(function() {
   var $link = $(".js-toggle-query-form");
+
+  if($link.length < 1) {
+    return;
+  }
+
   var $queryFormContainer = $(".query-form-container");
   var $closeIcon = $(".js-close-query-form");
   var editor = ace.edit("query-editor");

@@ -1,32 +1,4 @@
-<p>
-  <strong>Body:</strong>
-  <%= @db_query.body %>
-</p>
-
-<p>
-  <strong>Db connection:</strong>
-  <%= @db_query.db_connection %>
-</p>
-
-<p>
-  <strong>Fields:</strong>
-  <%= @db_query.fields %>
-</p>
-
-<p>
-  <strong>Result:</strong>
-  <%= @db_query.result %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @db_query.description %>
-</p>
-
-<p>
-  <strong>Duration:</strong>
-  <%= @db_query.duration %>
-</p>
-
-<%= link_to 'Edit', edit_db_query_path(@db_query) %> |
-<%= link_to 'Back', db_queries_path %>
+<%= react_component("Query", query: @db_query.to_json,
+                             fields: JSON.parse(@db_query.fields),
+                             results: JSON.parse(@db_query.result).first(10),
+                             queryId: @db_query.id) %>

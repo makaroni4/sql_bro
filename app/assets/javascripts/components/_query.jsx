@@ -1,4 +1,4 @@
-class QueryListItem extends React.Component {
+class Query extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -57,18 +57,38 @@ class QueryListItem extends React.Component {
   }
 
   render() {
-    let query = this.props.query;
+    let query = JSON.parse(this.props.query);
+    let fields = this.props.fields;
+    let results = this.props.results;
+
+    console.log(query)
 
     let queryDescription = query.description ? query.description : this.DEFAULT_QUERY_DESCRIPTION;
+
+    fields = fields.map(function(field) {
+      return <th>{field}</th>;
+    });
+    let tableRow = function(values) {
+      return values.map(function(value) {
+        if(Object.prototype.toString.call(value) === '[object Array]') {
+          return <td>{value.join(", ")}</td>;
+        } else {
+          return <td>{value}</td>;
+        }
+      });
+    };
+    results = results.map(function(values) {
+      return <tr>{tableRow(values)}</tr>;
+    });
 
     return (
       <div className="query" data-query-id={query.id}>
         <div className="query__description" contentEditable="true" dangerouslySetInnerHTML={{ __html: queryDescription }} >
         </div>
 
-        <a className="query__time" href={Routes.query_path(query.id)}>
+        <time className="query__time">
           { query.created_at }
-        </a>
+        </time>
 
         <div className="query__sql-body">
           <div className="query__db label label-default">
@@ -81,6 +101,19 @@ class QueryListItem extends React.Component {
               { query.body }
             </code>
           </pre>
+        </div>
+
+        <div className="query__results">
+          <table>
+            <thead>
+              <tr>
+                { fields }
+              </tr>
+            </thead>
+            <tbody>
+              { results }
+            </tbody>
+          </table>
         </div>
 
         <div className="query__total-results">
