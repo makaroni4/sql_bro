@@ -15,16 +15,7 @@ class Db::Connection < ApplicationRecord
   validates :port, presence: true
 
   def connector
-    "#{connector_name}_connector".classify.constantize.new(id)
-  end
-
-  def connector_name
-    case adapter
-    when "redshift", "pg"
-      "pg"
-    else
-      "mysql"
-    end
+    "#{adapter}_connector".classify.constantize.new(id)
   end
 
   private
