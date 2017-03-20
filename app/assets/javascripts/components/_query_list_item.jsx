@@ -58,26 +58,8 @@ class QueryListItem extends React.Component {
 
   render() {
     let query = this.props.query;
-    let fields = query.fields.map(function(field) {
-      return <th>{field}</th>;
-    });
-    let tableRow = function(values) {
-      return values.map(function(value) {
-        if(Object.prototype.toString.call(value) === '[object Array]') {
-          return <td>{value.join(", ")}</td>;
-        } else {
-          return <td>{value}</td>;
-        }
-      });
-    };
 
     let queryDescription = query.description ? query.description : this.DEFAULT_QUERY_DESCRIPTION;
-
-    let totalResults = query.results.length;
-
-    let results = query.results.slice(0, 10).map(function(values) {
-      return <tr>{tableRow(values)}</tr>;
-    });
 
     return (
       <div className="query" data-query-id={query.id}>
@@ -101,24 +83,9 @@ class QueryListItem extends React.Component {
           </pre>
         </div>
 
-        <div className="query__results">
-          <table>
-            <thead>
-              <tr>
-                { fields }
-              </tr>
-            </thead>
-            <tbody>
-              { results }
-            </tbody>
-          </table>
+        <div className="query__total-results">
+          Total results: { query.results_count }
         </div>
-
-        { totalResults > 10 &&
-          <div className="query__total-results">
-            Total results: { query.results.length }
-          </div>
-        }
       </div>
     );
   }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318200353) do
+ActiveRecord::Schema.define(version: 20170320202159) do
 
   create_table "db_columns", force: :cascade do |t|
     t.integer  "db_table_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20170318200353) do
     t.float    "duration"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "results_count"
     t.index ["db_connection_id"], name: "index_db_queries_on_db_connection_id"
   end
 
