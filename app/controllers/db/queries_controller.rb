@@ -3,7 +3,7 @@ class Db::QueriesController < ApplicationController
   before_action :set_db_query, only: [:show, :edit, :update, :destroy]
 
   def index
-    @db_queries = Db::Query.order(created_at: :desc).limit(5)
+    @db_queries = Db::Query.order(created_at: :desc).page(params[:page])
     db_connection = Db::Connection.first
     @db_query = db_connection.queries.build
   end
