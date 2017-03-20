@@ -10,7 +10,7 @@ class Db::Query < ApplicationRecord
       created_at: created_at.strftime("%d %b %Y %H:%M"),
       database: database,
       fields: JSON.parse(fields),
-      results: JSON.parse(result)
+      results: JSON.parse(result).first(10)
     )
   end
 

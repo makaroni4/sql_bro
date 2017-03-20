@@ -34,18 +34,20 @@ class RedshiftConnector < DbConnector
 
   def cancel_query(body)
     result = connection.exec <<-SQL
-      SELECT pg_cancel_backend(pid)
-      FROM pg_stat_activity
+      SELECT pid
+      FROM stv_recents
       WHERE
-        state = 'active'
+        user_name = '#{db_connection.user}'
+        AND db_name = '#{db_connection.database}'
         AND query = '#{body}'
-        AND application_name = 'sql_bro'
+        AND status = 'Running'
     SQL
 
-    return {
-      fields: result.fields,
-      result: result.values
-    }
+    result.values.flatten.each do |id|
+      connection.query <<-SQL
+        CANCEL #{id}
+      SQL
+    end
   end
 
   private
