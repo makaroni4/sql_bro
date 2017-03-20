@@ -86,6 +86,13 @@ class QueryListItem extends React.Component {
         <div className="query__total-results">
           Total results: { query.results_count }
         </div>
+
+        <div className="query__actions">
+          <a href={Routes.query_path(query.id, "csv")} className="btn btn-default btn-sm">
+            <i className="fa fa-download"></i>
+            CSV
+          </a>
+        </div>
       </div>
     );
   }

@@ -1,4 +1,5 @@
 .query {
+  position: relative;
   margin-top: 20px;
   padding: 0 10px 10px;
 
@@ -115,5 +116,11 @@
     padding: 10px 0;
 
     border-top: 1px solid #F1F1F1;
+  }
+
+  &__actions {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
   }
 }

@@ -9,6 +9,13 @@ class Db::QueriesController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.csv do
+        exporter = QueryToCsvExporter.new(params[:id])
+        send_data exporter.data, filename: exporter.filename
+      end
+    end
   end
 
   def new

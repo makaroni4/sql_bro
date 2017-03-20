@@ -15,8 +15,13 @@
 
     <script type="text/javascript">
       var Routes = {
-        query_path: function(query_id) {
-          return "/db/queries/" + query_id;
+        query_path: function(query_id, format) {
+          var path = "/db/queries/" + query_id;
+          if(format) {
+            path += "." + format;
+          }
+
+          return path;
         }
       };
     </script>
