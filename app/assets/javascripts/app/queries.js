@@ -5,7 +5,6 @@ $(function() {
     return;
   }
 
-  var $toggleLink = $(".js-toggle-query-form");
   var editor = ace.edit("query-editor");
   var $submitButton = $queryForm.find(".js-run-query");
   var $cancelButton = $queryForm.find(".js-cancel-query");

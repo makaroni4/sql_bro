@@ -1,11 +1,18 @@
 <div class="row">
-  <div class="col-lg-4">
-    <% @db_connections.each do |c| %>
-      <div class="list-group">
-        <%= link_to "#{c.adapter}: #{c.database}", edit_db_connection_path(c), clasS: "list-group-item" %>
-      </div>
-    <% end %>
+  <div class="col-lg-6">
+    <ul class="list-group">
+      <% @db_connections.each do |c| %>
+        <li class="list-group-item">
+          <%= "#{c.adapter}: #{c.database}" %>
+
+          <div class="pull-right">
+            <%= link_to "Setup autocomplete", "#", class: "btn btn-default btn-sm js-setup-autocomplete", data: { db_connection_id: c.id } %>
+            <%= link_to "Edit", edit_db_connection_path(c), class: "btn btn-default btn-sm" %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>
 
-<%= link_to 'New Db Connection', new_db_connection_path, class: "btn btn-primary btn-lg" %>
+<%= link_to "New Db Connection", new_db_connection_path, class: "btn btn-primary btn-lg" %>

@@ -36,7 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem "react-rails"
-
+gem "ace-rails-ap"
 gem "bootstrap-sass"
 gem "bootswatch-rails"
 gem "font-awesome-rails"

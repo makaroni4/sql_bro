@@ -6,14 +6,13 @@
   this.App || (this.App = {});
 
   App.setupAutocompleteLog = {};
-  App.setupAutocomplete = function() {
+  App.setupAutocomplete = function(dbConnectionId) {
     var $queryForm = $("#new_db_query");
-    var currentDbConnectionId = $queryForm.find("#db_query_db_connection_id").val();
 
-    if(!App.setupAutocompleteLog[currentDbConnectionId]) {
-      App.setupAutocompleteLog[currentDbConnectionId] = new Date();
-    } else if(new Date() - App.setupAutocompleteLog[currentDbConnectionId] > 10000) {
-      App.setupAutocompleteLog[currentDbConnectionId] = new Date();
+    if(!App.setupAutocompleteLog[dbConnectionId]) {
+      App.setupAutocompleteLog[dbConnectionId] = new Date();
+    } else if(new Date() - App.setupAutocompleteLog[dbConnectionId] > 10000) {
+      App.setupAutocompleteLog[dbConnectionId] = new Date();
     } else {
       return;
     }
@@ -22,7 +21,7 @@
       url: "/db/queries/setup_autocomplete",
       dataType: "json",
       data: {
-        db_connection_id: currentDbConnectionId
+        db_connection_id: dbConnectionId
       }
     });
   }

@@ -1,4 +1,10 @@
 $(function() {
+  $(document).on("keydown", null, "Ctrl+n", function(e) {
+    if(window.location.pathname !== Routes.new_query_path()) {
+      window.location.replace(Routes.new_query_path());
+    }
+  });
+
   var $queryForm = $("#new_db_query");
 
   if($queryForm.length < 1) {
@@ -10,20 +16,6 @@ $(function() {
   jQuery.hotkeys.options.filterInputAcceptingElements = false;
   jQuery.hotkeys.options.filterContentEditable = false;
   jQuery.hotkeys.options.filterTextInputs = false;
-
-  var $link = $(".js-toggle-query-form");
-
-  editor.commands.addCommand({
-    name: "toggleQueryForm",
-    bindKey: {win: "Ctrl-n", mac: "Ctrl-n"},
-    exec: function(editor) {
-      $link.click();
-    }
-  });
-
-  $(document).on("keydown", null, "Ctrl+n", function(e) {
-    $link.click();
-  });
 
   var $runQueryButton = $queryForm.find(".js-run-query");
 

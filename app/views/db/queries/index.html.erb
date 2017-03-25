@@ -1,9 +1,3 @@
-<div class="query-form-container">
-  <%= render "form", db_query: @db_query %>
-</div>
-
-<%= link_to "New Query", "#", class: "btn btn-primary btn-lg js-toggle-query-form" %>
-
 <%= react_component("QueryList", queries: @db_queries.to_json) %>
 
 <%= paginate @db_queries %>
