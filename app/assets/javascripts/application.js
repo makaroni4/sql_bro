@@ -8,5 +8,8 @@
 //= require jquery.hotkeys
 //= require jquery.dragtable
 //= require jquery.colresizable
+//= require ace
+//= require ext-language_tools
+//= require highlight.min
 //= require_tree ./app
 //= require cable
