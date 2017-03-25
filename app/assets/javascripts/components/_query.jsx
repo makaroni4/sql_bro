@@ -61,8 +61,6 @@ class Query extends React.Component {
     let fields = this.props.fields;
     let results = this.props.results;
 
-    console.log(query)
-
     let queryDescription = query.description ? query.description : this.DEFAULT_QUERY_DESCRIPTION;
 
     fields = fields.map(function(field) {
