@@ -39,11 +39,9 @@
     received: function(query) {
       query = JSON.parse(query);
 
-      var queryComponent = React.createElement(Query, {
-        query: query,
+      var queryComponent = React.createElement(QueryResultTable, {
         fields: query.fields,
-        result: query.result,
-        queryId: query.id
+        results: query.result
       });
 
       ReactDOM.render(queryComponent, document.getElementsByClassName("js-query-result-container")[0]);

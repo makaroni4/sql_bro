@@ -88,7 +88,9 @@ class Query extends React.Component {
         </div>
 
         <div className="query__results">
-          <QueryResultTable fields={this.props.fields} results={this.props.result} />
+          <div class="query-results">
+            <QueryResultTable fields={this.props.fields} results={this.props.result} />
+          </div>
         </div>
 
         <div className="query__total-results">

@@ -24,16 +24,18 @@ class QueryResultTable extends React.Component {
     });
 
     return (
-      <table>
-        <thead>
-          <tr>
-            { fields }
-          </tr>
-        </thead>
-        <tbody>
-          { results }
-        </tbody>
-      </table>
+      <div className="query-results">
+        <table>
+          <thead>
+            <tr>
+              { fields }
+            </tr>
+          </thead>
+          <tbody>
+            { results }
+          </tbody>
+        </table>
+      </div>
     )
   }
 }
