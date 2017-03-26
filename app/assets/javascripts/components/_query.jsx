@@ -57,9 +57,13 @@ class Query extends React.Component {
   }
 
   render() {
-    let query = JSON.parse(this.props.query);
-    let fields = this.props.fields;
-    let results = this.props.results;
+    let readJsonProp = function(value) {
+      return typeof value === "string" ? JSON.parse(value) : value;
+    };
+
+    let query = readJsonProp(this.props.query);
+    let fields = readJsonProp(this.props.fields);
+    let results = readJsonProp(this.props.result);
 
     let queryDescription = query.description ? query.description : this.DEFAULT_QUERY_DESCRIPTION;
 

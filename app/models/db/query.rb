@@ -10,7 +10,9 @@ class Db::Query < ApplicationRecord
       created_at: created_at.strftime("%d %b %Y %H:%M"),
       database: database,
       body: body,
-      results_count: results_count
+      results_count: results_count,
+      fields: JSON.parse(fields),
+      result: JSON.parse(result)
     )
   end
 

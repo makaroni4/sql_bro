@@ -39,6 +39,15 @@
     received: function(query) {
       query = JSON.parse(query);
 
+      var queryComponent = React.createElement(Query, {
+        query: query,
+        fields: query.fields,
+        result: query.result,
+        queryId: query.id
+      });
+
+      ReactDOM.render(queryComponent, document.getElementsByClassName("js-query-result-container")[0]);
+
       var $queryForm = $(".query-form");
       var $submitButton = $queryForm.find(".js-run-query");
       var $cancelButton = $queryForm.find(".js-cancel-query");
