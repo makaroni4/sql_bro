@@ -62,26 +62,8 @@ class Query extends React.Component {
     };
 
     let query = readJsonProp(this.props.query);
-    let fields = readJsonProp(this.props.fields);
-    let results = readJsonProp(this.props.result);
 
     let queryDescription = query.description ? query.description : this.DEFAULT_QUERY_DESCRIPTION;
-
-    fields = fields.map(function(field) {
-      return <th>{field}</th>;
-    });
-    let tableRow = function(values) {
-      return values.map(function(value) {
-        if(Object.prototype.toString.call(value) === '[object Array]') {
-          return <td>{value.join(", ")}</td>;
-        } else {
-          return <td>{value}</td>;
-        }
-      });
-    };
-    results = results.map(function(values) {
-      return <tr>{tableRow(values)}</tr>;
-    });
 
     return (
       <div className="query" data-query-id={query.id}>
@@ -106,16 +88,7 @@ class Query extends React.Component {
         </div>
 
         <div className="query__results">
-          <table>
-            <thead>
-              <tr>
-                { fields }
-              </tr>
-            </thead>
-            <tbody>
-              { results }
-            </tbody>
-          </table>
+          <QueryResultTable fields={this.props.fields} results={this.props.result} />
         </div>
 
         <div className="query__total-results">
