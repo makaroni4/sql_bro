@@ -48,6 +48,13 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :auto_limit do %>
+      <%= f.check_box :auto_limit, checked: true %>
+      Auto LIMIT to 100 records
+    <% end %>
+  </div>
+
+  <div class="form-group">
     <div class="query-form__error well">
     </div>
   </div>

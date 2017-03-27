@@ -38,12 +38,17 @@ $(function() {
     var dbConnectionId = $this.find("#db_query_db_connection_id").val();
     var description = $this.find("#db_query_description").val();
     var sqlBody = $this.find("#db_query_body").val();
+    var autoLimit = $this.find("#db_query_auto_limit").prop("checked");
 
     if(sqlBody) {
       $submitButton.hide();
       $cancelButton.addClass("query-form__cancel-button--active");
       $formOverlay.addClass("query-form__active-overlay--active");
       $queryFormErrorContainer.hide();
+
+      if(autoLimit) {
+        sqlBody += "\nLIMIT 100";
+      }
 
       App.query.run(dbConnectionId, sqlBody, description);
     } else {

@@ -39,13 +39,6 @@
     received: function(query) {
       query = JSON.parse(query);
 
-      var queryComponent = React.createElement(QueryResultTable, {
-        fields: query.fields,
-        results: query.result
-      });
-
-      ReactDOM.render(queryComponent, document.getElementsByClassName("js-query-result-container")[0]);
-
       var $queryForm = $(".query-form");
       var $submitButton = $queryForm.find(".js-run-query");
       var $cancelButton = $queryForm.find(".js-cancel-query");
@@ -58,8 +51,13 @@
         $queryFormErrorContainer.text(query.error);
         $queryFormErrorContainer.show();
       } else {
-        // insert query to QueryList
-        // insert query to Query
+        var queryComponent = React.createElement(QueryResultTable, {
+          fields: query.fields,
+          results: query.result
+        });
+
+        ReactDOM.render(queryComponent, document.getElementsByClassName("js-query-result-container")[0]);
+
         $queryFormErrorContainer.hide();
       }
 

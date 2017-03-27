@@ -14,8 +14,8 @@ class QueryChannel < ApplicationCable::Channel
 
     ActionCable.server.broadcast "query_channel_#{current_user}", db_query.to_json
   rescue Exception => e
-    Rails.logger.warning e.message
-    Rails.logger.warning e.backtrace.join("\n")
+    Rails.logger.warn e.message
+    Rails.logger.warn e.backtrace.join("\n")
 
     ActionCable.server.broadcast "query_channel_#{current_user}", { error: e.message }.to_json
   end
