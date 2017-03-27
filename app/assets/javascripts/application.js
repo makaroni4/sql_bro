@@ -1,4 +1,5 @@
 //= require jquery
+//= require dom.url
 //= require jquery_ujs
 //= require jquery.ui
 //= require react

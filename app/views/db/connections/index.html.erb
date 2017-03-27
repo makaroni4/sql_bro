@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-7">
     <ul class="list-group">
       <% @db_connections.each do |c| %>
         <li class="list-group-item">
@@ -8,6 +8,7 @@
           <div class="pull-right">
             <%= link_to "Setup autocomplete", "#", class: "btn btn-default btn-sm js-setup-autocomplete", data: { db_connection_id: c.id } %>
             <%= link_to "Edit", edit_db_connection_path(c), class: "btn btn-default btn-sm" %>
+            <%= link_to "New query", new_db_query_path(db_connection_id: c.id), class: "btn btn-primary btn-sm" %>
           </div>
         </li>
       <% end %>
