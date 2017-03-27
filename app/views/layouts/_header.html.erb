@@ -21,6 +21,17 @@
           Connections
         <% end %>
       </ul>
+
+      <form class="header-search-form js-header-search-form navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <button class="header-search-form__submit" type="submit">
+            <%= fa_icon "search", class: "header-search-form__search-icon js-header-search-form-search-icon" %>
+            <%= fa_icon "spinner spin", class: "header-search-form__spinner js-header-search-form-spinner" %>
+          </button>
+
+          <input type="text" class="form-control js-header-search-form-input" placeholder="Search">
+        </div>
+      </form>
     </div>
   </div>
 </nav>
