@@ -88,13 +88,15 @@ class Query extends React.Component {
         </div>
 
         <div className="query__results">
-          <div class="query-results">
-            <QueryResultTable fields={this.props.fields} results={this.props.result} />
-          </div>
+          <QueryResultTable fields={this.props.fields} results={this.props.result} />
         </div>
 
         <div className="query__total-results">
           Total results: { query.results_count }
+        </div>
+
+        <div className="query__actions">
+          <QueryActions queryId={query.id} />
         </div>
       </div>
     );
