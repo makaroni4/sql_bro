@@ -1,5 +1,5 @@
 class QueryResultSerializer < ActiveModel::Serializer
-  attributes :id, :database, :body, :results_count, :fields, :result
+  attributes :id, :database, :body, :results_count, :fields, :result, :created_at, :description
 
   def created_at
     object.created_at.strftime("%d %b %Y %H:%M")
@@ -10,6 +10,6 @@ class QueryResultSerializer < ActiveModel::Serializer
   end
 
   def result
-    JSON.parse(result)
+    JSON.parse(object.result)
   end
 end

@@ -48,7 +48,6 @@ class QuerySearch extends React.Component {
           q: escapedValue
         },
         success: function(queires) {
-          console.log(queries.responseJSON)
           that.setState({
             isLoading: false,
             suggestions: queries.responseJSON
@@ -96,7 +95,7 @@ class QuerySearch extends React.Component {
 
   render() {
     let inputProps = {
-      placeholder: "Type 'c'",
+      placeholder: "Search queries",
       value: this.state.value,
       onChange: this.onChange.bind(this)
     };

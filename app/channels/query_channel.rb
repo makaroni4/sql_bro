@@ -12,7 +12,7 @@ class QueryChannel < ApplicationCable::Channel
 
     db_query.run
 
-    db_query_serialization = ActiveModelSerializers::SerializableResource.new(db_query, {})
+    db_query_serialization = QueryResultSerializer.new(db_query, {})
 
     ActionCable.server.broadcast "query_channel_#{current_user}", db_query_serialization.to_json
   rescue Exception => e

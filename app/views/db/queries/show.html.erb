@@ -1,4 +1,1 @@
-<%= react_component("Query", query: JSON.parse(@db_query.to_json),
-                             fields: JSON.parse(@db_query.fields),
-                             result: JSON.parse(@db_query.result).first(10),
-                             queryId: @db_query.id) %>
+<%= react_component("Query", query: @db_query_serializer.to_json) %>

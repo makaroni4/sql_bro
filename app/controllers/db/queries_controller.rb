@@ -6,11 +6,18 @@ class Db::QueriesController < ApplicationController
 
   def index
     @db_queries = Db::Query.order(created_at: :desc).page(params[:page])
+    @db_queries_serialization = ActiveModel::SerializableResource.new(
+      @db_queries,
+      each_serializer: QueryResultSerializer
+    )
   end
 
   def show
     respond_to do |format|
-      format.html
+      format.html do
+        @db_query_serializer = QueryResultSerializer.new(@db_query)
+      end
+
       format.csv do
         exporter = QueryToCsvExporter.new(params[:id])
         send_data exporter.data, filename: exporter.filename

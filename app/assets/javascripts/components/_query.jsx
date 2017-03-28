@@ -1,15 +1,18 @@
 class Query extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      queryId: this.props.queryId
+      query: typeof this.props.query === "string" ? JSON.parse(this.props.query) : this.props.query
     };
+
     this.DEFAULT_QUERY_DESCRIPTION = "<span class='query__description--default'>Description</span>";
   }
 
   componentDidMount() {
     var that = this;
-    var queryId = that.state.queryId;
+    var queryId = that.state.query.id;
+
     var $queryBlock = $(".query[data-query-id=" + queryId + "]");
     let $queryCode = $queryBlock.find("code").each(function(i, block) {
       hljs.highlightBlock(block);
@@ -58,10 +61,10 @@ class Query extends React.Component {
 
   render() {
     let readJsonProp = function(value) {
-      return typeof value === "string" ? JSON.parse(value) : value;
+      return ;
     };
 
-    let query = readJsonProp(this.props.query);
+    let query = this.state.query;
 
     let queryDescription = query.description ? query.description : this.DEFAULT_QUERY_DESCRIPTION;
 
@@ -88,7 +91,7 @@ class Query extends React.Component {
         </div>
 
         <div className="query__results">
-          <QueryResultTable fields={this.props.fields} results={this.props.result} />
+          <QueryResultTable fields={query.fields} results={query.result} />
         </div>
 
         <div className="query__total-results">
