@@ -7,17 +7,6 @@ class Db::Query < ApplicationRecord
 
   validates :body, :connection, :fields, :result, :duration, presence: true
 
-  def as_json(options = {})
-    super.merge(
-      created_at: created_at.strftime("%d %b %Y %H:%M"),
-      database: database,
-      body: body,
-      results_count: results_count,
-      fields: JSON.parse(fields),
-      result: JSON.parse(result)
-    )
-  end
-
   def run
     t1 = Time.current
     response = connection.connector.query(body)

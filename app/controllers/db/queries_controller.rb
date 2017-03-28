@@ -1,4 +1,6 @@
 class Db::QueriesController < ApplicationController
+  serialization_scope :view_context
+
   before_action :check_db_connection_exist, only: :new
   before_action :set_db_query, only: [:show, :edit, :update, :destroy]
 
@@ -55,6 +57,16 @@ class Db::QueriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to db_queries_url, notice: 'Query was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def search
+    queries = Db::Query.where("description LIKE ?", "%#{params[:q]}%").order(created_at: :desc).limit(5)
+
+    respond_to do |format|
+      format.json do
+        render json: queries, each_serializer: QuerySearchSerializer
+      end
     end
   end
 

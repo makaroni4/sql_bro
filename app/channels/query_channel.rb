@@ -12,7 +12,9 @@ class QueryChannel < ApplicationCable::Channel
 
     db_query.run
 
-    ActionCable.server.broadcast "query_channel_#{current_user}", db_query.to_json
+    db_query_serialization = ActiveModelSerializers::SerializableResource.new(db_query, {})
+
+    ActionCable.server.broadcast "query_channel_#{current_user}", db_query_serialization.to_json
   rescue Exception => e
     Rails.logger.warn e.message
     Rails.logger.warn e.backtrace.join("\n")

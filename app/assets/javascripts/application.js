@@ -14,5 +14,6 @@
 //= require ace/mode-sql
 //= require ace/ext-language_tools
 //= require highlight.min
+//= require react.autosuggest
 //= require_tree ./app
 //= require cable

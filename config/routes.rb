@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         get :setup_autocomplete
         get :autocomplete
         get :cancel
+        get :search
       end
     end
   end
