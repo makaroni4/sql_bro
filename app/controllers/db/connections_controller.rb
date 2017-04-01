@@ -5,6 +5,10 @@ class Db::ConnectionsController < ApplicationController
     @db_connections = Db::Connection.all
   end
 
+  def tables
+    @db_connection = Db::Connection.find(params[:connection_id])
+  end
+
   def show
   end
 

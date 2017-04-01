@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   end
 
   namespace :db do
-    resources :connections
+    resources :connections do
+      get :tables
+    end
   end
 end
