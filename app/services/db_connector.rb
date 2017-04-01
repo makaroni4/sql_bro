@@ -28,14 +28,14 @@ class DbConnector
     end
   end
 
-  def persist_table_sizes(table_sizes_query_result)
+  def persist_table_data(table_sizes_query_result, key)
     table_sizes_query_result.group_by(&:first).each do |schema, values|
       db_schema = db_connection.schemas.find_or_create_by(name: schema)
 
-      values.each do |_, table, size|
+      values.each do |_, table, value|
         db_table = db_schema.tables.find_or_create_by(name: table)
         db_table.update(
-          size: size
+          key => value
         )
       end
     end

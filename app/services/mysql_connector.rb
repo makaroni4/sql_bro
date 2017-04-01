@@ -48,9 +48,21 @@ class MysqlConnector < DbConnector
       WHERE TABLE_SCHEMA NOT IN ('sys', 'information_schema', 'mysql', 'performance_schema')
     SQL
 
-    persist_table_sizes(tables_sizes.each(as: :array).to_a)
+    persist_table_data(tables_sizes.each(as: :array).to_a, :size)
   end
 
+  def download_table_row_counts
+    row_counts = connection.query <<-SQL
+      SELECT
+        TABLE_SCHEMA,
+        TABLE_NAME,
+        TABLE_ROWS
+      FROM information_schema.tables
+      WHERE TABLE_SCHEMA NOT IN ('sys', 'information_schema', 'mysql', 'performance_schema')
+    SQL
+
+    persist_table_data(row_counts.each(as: :array).to_a, :rows_count)
+  end
 
   private
 

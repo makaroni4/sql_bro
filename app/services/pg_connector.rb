@@ -57,7 +57,24 @@ class PgConnector < DbConnector
       FROM pg_catalog.pg_statio_user_tables
     SQL
 
-    persist_table_sizes(tables_sizes.values)
+    persist_table_data(tables_sizes.values, :size)
+  end
+
+  def download_table_row_counts
+    row_counts = connection.query <<-SQL
+      SELECT
+        nspname AS schema,
+        relname AS table,
+        reltuples AS rows_count
+      FROM pg_class c
+      INNER JOIN pg_namespace n
+        ON n.oid = c.relnamespace
+      WHERE
+        nspname not IN ('pg_catalog', 'information_schema', 'pg_toast')
+        AND relkind = 'r'
+    SQL
+
+    persist_table_data(row_counts.values, :rows_count)
   end
 
   private
