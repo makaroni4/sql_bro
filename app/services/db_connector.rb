@@ -27,4 +27,17 @@ class DbConnector
       end
     end
   end
+
+  def persist_table_sizes(table_sizes_query_result)
+    table_sizes_query_result.group_by(&:first).each do |schema, values|
+      db_schema = db_connection.schemas.find_or_create_by(name: schema)
+
+      values.each do |_, table, size|
+        db_table = db_schema.tables.find_or_create_by(name: table)
+        db_table.update(
+          size: size
+        )
+      end
+    end
+  end
 end

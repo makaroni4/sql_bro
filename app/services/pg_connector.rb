@@ -48,6 +48,18 @@ class PgConnector < DbConnector
     }
   end
 
+  def download_table_sizes
+    tables_sizes = connection.exec <<-SQL
+      SELECT
+        schemaname AS schema,
+        relname AS table,
+        pg_total_relation_size(relid) AS size
+      FROM pg_catalog.pg_statio_user_tables
+    SQL
+
+    persist_table_sizes(tables_sizes.values)
+  end
+
   private
 
   def connection

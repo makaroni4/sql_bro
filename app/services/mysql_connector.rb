@@ -38,6 +38,20 @@ class MysqlConnector < DbConnector
     end
   end
 
+  def download_table_sizes
+    tables_sizes = connection.query <<-SQL
+      SELECT
+        TABLE_SCHEMA,
+        TABLE_NAME,
+        DATA_LENGTH
+      FROM information_schema.tables
+      WHERE TABLE_SCHEMA NOT IN ('sys', 'information_schema', 'mysql', 'performance_schema')
+    SQL
+
+    persist_table_sizes(tables_sizes.each(as: :array).to_a)
+  end
+
+
   private
 
   def connection

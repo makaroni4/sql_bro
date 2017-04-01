@@ -1,4 +1,6 @@
-<h4>Tables of <b><%= @db_connection.database %></b> database</h4>
+<h4>
+  Tables of <b><%= @db_connection.database %></b> database
+</h4>
 
 <table class="table table-striped table-hover ">
   <thead>
@@ -16,8 +18,8 @@
         <tr>
           <td><%= schema.name %></td>
           <td><%= table.name %></td>
-          <td></td>
-          <td></td>
+          <td><%= table.rows_count %></td>
+          <td><%= table.size %></td>
         </tr>
       <% end %>
     <% end %>

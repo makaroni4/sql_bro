@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320202159) do
+ActiveRecord::Schema.define(version: 20170401204447) do
 
   create_table "db_columns", force: :cascade do |t|
     t.integer  "db_table_id"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20170320202159) do
     t.string   "name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.bigint   "size"
+    t.bigint   "rows_count"
     t.index ["db_schema_id", "name"], name: "index_db_tables_on_db_schema_id_and_name", unique: true
     t.index ["db_schema_id"], name: "index_db_tables_on_db_schema_id"
   end
