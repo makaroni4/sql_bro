@@ -47,7 +47,7 @@ class MysqlConnector < DbConnector
       SELECT
         TABLE_SCHEMA,
         TABLE_NAME,
-        DATA_LENGTH
+        DATA_LENGTH / 1024 / 1024
       FROM information_schema.tables
       WHERE TABLE_SCHEMA NOT IN ('sys', 'information_schema', 'mysql', 'performance_schema')
     SQL

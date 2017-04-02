@@ -58,7 +58,7 @@ class PgConnector < DbConnector
       SELECT
         schemaname AS schema,
         relname AS table,
-        pg_total_relation_size(relid) AS size
+        pg_total_relation_size(relid) / 1024 / 1024 AS size
       FROM pg_catalog.pg_statio_user_tables
     SQL
 
