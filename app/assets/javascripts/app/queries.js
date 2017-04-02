@@ -46,11 +46,7 @@ $(function() {
       $formOverlay.addClass("query-form__active-overlay--active");
       $queryFormErrorContainer.hide();
 
-      if(autoLimit) {
-        sqlBody += "\nLIMIT 100";
-      }
-
-      App.query.run(dbConnectionId, sqlBody, description);
+      App.query.run(dbConnectionId, sqlBody, description, autoLimit);
     } else {
       $queryFormErrorContainer.text("Please, enter a query");
       $queryFormErrorContainer.show();

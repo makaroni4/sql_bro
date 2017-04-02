@@ -7,7 +7,8 @@ class QueryChannel < ApplicationCable::Channel
     db_query = Db::Query.new({
       db_connection_id: data["db_connection_id"],
       description: data["description"],
-      body: data["sql_body"]
+      body: data["sql_body"],
+      auto_limit: data["auto_limit"]
     })
 
     db_query.run

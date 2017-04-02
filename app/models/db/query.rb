@@ -9,7 +9,10 @@ class Db::Query < ApplicationRecord
 
   def run
     t1 = Time.current
-    response = connection.connector.query(body)
+
+    actual_body = auto_limit ? self.body + "\nLIMIT 100" : self.body
+
+    response = connection.connector.query(actual_body)
 
     self.fields = response[:fields].to_json
     self.result = response[:result].to_json

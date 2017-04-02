@@ -29,11 +29,12 @@
   App.cable = ActionCable.createConsumer("ws://" + window.location.host + "/websocket");
 
   App.query = App.cable.subscriptions.create("QueryChannel", {
-    run: function(db_connection_id, sql_body, description) {
+    run: function(dbConnectionId, sqlBody, description, autoLimit) {
       return this.perform("run_query", {
-        db_connection_id: db_connection_id,
-        sql_body: sql_body,
-        description: description
+        db_connection_id: dbConnectionId,
+        sql_body: sqlBody,
+        description: description,
+        auto_limit: autoLimit
       });
     },
     received: function(query) {
