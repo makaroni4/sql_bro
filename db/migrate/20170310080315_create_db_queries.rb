@@ -3,8 +3,8 @@ class CreateDbQueries < ActiveRecord::Migration[5.0]
     create_table :db_queries do |t|
       t.text :body
       t.belongs_to :db_connection, foreign_key: true
-      t.text :fields
-      t.text :result
+      t.json :fields
+      t.json :result
       t.text :description
       t.float :duration
 

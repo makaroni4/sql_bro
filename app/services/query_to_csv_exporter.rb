@@ -14,9 +14,9 @@ class QueryToCsvExporter
 
   def data
     CSV.generate do |csv|
-      csv << JSON.parse(db_query.fields)
+      csv << db_query.fields
 
-      JSON.parse(db_query.result).each do |row|
+      db_query.result.each do |row|
         csv << row
       end
     end

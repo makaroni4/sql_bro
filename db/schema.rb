@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 20170402130929) do
   create_table "db_queries", force: :cascade do |t|
     t.text     "body"
     t.integer  "db_connection_id"
-    t.text     "fields"
-    t.text     "result"
+    t.json     "fields"
+    t.json     "result"
     t.text     "description"
     t.float    "duration"
     t.datetime "created_at",       null: false

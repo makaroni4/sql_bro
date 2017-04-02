@@ -14,8 +14,8 @@ class Db::Query < ApplicationRecord
 
     response = connection.connector.query(actual_body)
 
-    self.fields = response[:fields].to_json
-    self.result = response[:result].to_json
+    self.fields = response[:fields]
+    self.result = response[:result]
     self.results_count = response[:result].count
     self.duration = (Time.current - t1)
 

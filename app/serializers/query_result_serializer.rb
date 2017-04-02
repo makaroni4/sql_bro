@@ -6,10 +6,10 @@ class QueryResultSerializer < ActiveModel::Serializer
   end
 
   def fields
-    JSON.parse(object.fields)
+    object.fields
   end
 
   def result
-    JSON.parse(object.result)
+    object.result
   end
 end
