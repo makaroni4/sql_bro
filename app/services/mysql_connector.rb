@@ -11,11 +11,15 @@ class MysqlConnector < DbConnector
   def store_columns_info
     columns_info = connection.query <<-SQL
       SELECT
-        TABLE_SCHEMA,
-        TABLE_NAME,
+        c.TABLE_SCHEMA,
+        c.TABLE_NAME,
+        (CASE WHEN TABLE_TYPE LIKE '%VIEW%' THEN TRUE ELSE FALSE END) AS IS_VIEW,
         COLUMN_NAME
-      FROM INFORMATION_SCHEMA.COLUMNS
-      WHERE TABLE_SCHEMA NOT IN ('sys', 'information_schema', 'mysql', 'performance_schema')
+      FROM information_schema.columns c
+      INNER JOIN information_schema.tables t
+        ON c.TABLE_SCHEMA = t.TABLE_SCHEMA
+          AND c.TABLE_NAME = t.TABLE_NAME
+      WHERE c.TABLE_SCHEMA NOT IN ('sys', 'information_schema', 'mysql', 'performance_schema');
     SQL
 
     persist_columns_info(columns_info.each(as: :array).to_a)
