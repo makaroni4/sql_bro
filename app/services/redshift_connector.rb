@@ -50,6 +50,32 @@ class RedshiftConnector < DbConnector
     end
   end
 
+  def download_table_sizes
+    tables_sizes = connection.exec <<-SQL
+      SELECT
+        i.schema,
+        i.table,
+        i.size
+      FROM svv_table_info i
+      WHERE database = '#{db_connection.database}'
+    SQL
+
+    persist_table_data(tables_sizes.values, :size)
+  end
+
+  def download_table_row_counts
+    row_counts = connection.exec <<-SQL
+      SELECT
+        i.schema,
+        i.table,
+        i.tbl_rows
+      FROM svv_table_info i
+      WHERE database = '#{db_connection.database}'
+    SQL
+
+    persist_table_data(row_counts.values, :rows_count)
+  end
+
   private
 
   def connection
