@@ -1,7 +1,7 @@
 class Db::QueriesController < ApplicationController
   serialization_scope :view_context
 
-  before_action :check_db_connection_exist, only: :new
+  before_action :check_db_connection_exist, only: [:index, :new]
   before_action :set_db_query, only: [:show, :edit, :update, :destroy]
 
   def index

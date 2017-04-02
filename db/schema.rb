@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 20170402130929) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "db_columns", force: :cascade do |t|
     t.integer  "db_table_id"
     t.string   "name"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["db_table_id", "name"], name: "index_db_columns_on_db_table_id_and_name", unique: true
-    t.index ["db_table_id"], name: "index_db_columns_on_db_table_id"
+    t.index ["db_table_id", "name"], name: "index_db_columns_on_db_table_id_and_name", unique: true, using: :btree
+    t.index ["db_table_id"], name: "index_db_columns_on_db_table_id", using: :btree
   end
 
   create_table "db_connections", force: :cascade do |t|
@@ -43,7 +46,7 @@ ActiveRecord::Schema.define(version: 20170402130929) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "results_count"
-    t.index ["db_connection_id"], name: "index_db_queries_on_db_connection_id"
+    t.index ["db_connection_id"], name: "index_db_queries_on_db_connection_id", using: :btree
   end
 
   create_table "db_schemas", force: :cascade do |t|
@@ -51,8 +54,8 @@ ActiveRecord::Schema.define(version: 20170402130929) do
     t.string   "name"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["db_connection_id", "name"], name: "index_db_schemas_on_db_connection_id_and_name", unique: true
-    t.index ["db_connection_id"], name: "index_db_schemas_on_db_connection_id"
+    t.index ["db_connection_id", "name"], name: "index_db_schemas_on_db_connection_id_and_name", unique: true, using: :btree
+    t.index ["db_connection_id"], name: "index_db_schemas_on_db_connection_id", using: :btree
   end
 
   create_table "db_tables", force: :cascade do |t|
@@ -63,8 +66,12 @@ ActiveRecord::Schema.define(version: 20170402130929) do
     t.bigint   "size"
     t.bigint   "rows_count"
     t.boolean  "is_view",      default: false
-    t.index ["db_schema_id", "name"], name: "index_db_tables_on_db_schema_id_and_name", unique: true
-    t.index ["db_schema_id"], name: "index_db_tables_on_db_schema_id"
+    t.index ["db_schema_id", "name"], name: "index_db_tables_on_db_schema_id_and_name", unique: true, using: :btree
+    t.index ["db_schema_id"], name: "index_db_tables_on_db_schema_id", using: :btree
   end
 
+  add_foreign_key "db_columns", "db_tables"
+  add_foreign_key "db_queries", "db_connections"
+  add_foreign_key "db_schemas", "db_connections"
+  add_foreign_key "db_tables", "db_schemas"
 end
