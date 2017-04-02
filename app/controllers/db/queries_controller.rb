@@ -26,8 +26,7 @@ class Db::QueriesController < ApplicationController
   end
 
   def new
-    db_connection = Db::Connection.first
-    @db_query = db_connection.queries.build
+    @db_query = init_or_clone_query(params[:query_id])
   end
 
   def edit
@@ -120,5 +119,15 @@ class Db::QueriesController < ApplicationController
 
     def check_db_connection_exist
       redirect_to new_db_connection_path unless Db::Connection.any?
+    end
+
+    def init_or_clone_query(query_id)
+      if query_id.present?
+        parent_query = Db::Query.find(query_id)
+        Db::Query.new(parent_query.attributes.slice("db_connection_id", "body", "description"))
+      else
+        db_connection = Db::Connection.first
+        db_connection.queries.build
+      end
     end
 end

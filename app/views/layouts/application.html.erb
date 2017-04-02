@@ -10,16 +10,21 @@
 
     <script type="text/javascript">
       var Routes = {
-        query_path: function(query_id, format) {
-          var path = "/db/queries/" + query_id;
+        query_path: function(queryId, format) {
+          var path = "/db/queries/" + queryId;
           if(format) {
             path += "." + format;
           }
 
           return path;
         },
-        new_query_path: function() {
-          return "/db/queries/new";
+        new_query_path: function(queryId) {
+          var path = "/db/queries/new";
+          if(queryId) {
+            path += "?query_id=" + queryId;
+          }
+
+          return path;
         }
       };
     </script>
