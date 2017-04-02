@@ -17,7 +17,12 @@
       <% schema.tables.each do |table| %>
         <tr>
           <td><%= schema.name %></td>
-          <td><%= table.name %></td>
+          <td>
+            <%= table.name %>
+            <% if table.is_view? %>
+              <span class="label label-info">VIEW</span>
+            <% end %>
+          </td>
           <td><%= table.rows_count %></td>
           <td><%= table.size %></td>
         </tr>

@@ -19,7 +19,8 @@ class DbConnector
       tables_columns.each do |table_name, columns|
         next unless columns.any?
 
-        table = schema.tables.find_or_create_by!(name: table_name)
+        is_view = columns.first[2]
+        table = schema.tables.find_or_create_by!(name: table_name, is_view: is_view)
 
         columns.each do |_, _, column_name|
           table.columns.find_or_create_by!(name: column_name)

@@ -12,16 +12,21 @@ class RedshiftConnector < DbConnector
     columns_info = connection.exec <<-SQL
       WITH tables AS (
         SELECT
-          table_schema,
-          table_name
-        FROM information_schema.tables
-        WHERE table_schema not IN ('pg_catalog', 'information_schema')
-        AND table_schema not LIKE 'pg_toast%'
+          t.table_schema,
+          t.table_name,
+          (CASE WHEN v.view_definition IS NOT NULL THEN TRUE ELSE FALSE END) AS is_view
+        FROM information_schema.tables t
+        LEFT JOIN information_schema.views v
+          ON v.table_schema = t.table_schema
+            AND v.table_name = t.table_name
+        WHERE t.table_schema not IN ('pg_catalog', 'information_schema')
+        AND t.table_schema not LIKE 'pg_toast%'
       )
 
       SELECT
         c.table_schema AS schema,
         c.table_name AS table,
+        t.is_view AS is_view,
         column_name AS column
       FROM information_schema.columns c
       INNER JOIN tables t
