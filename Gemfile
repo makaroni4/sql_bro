@@ -40,6 +40,7 @@ gem "ace-rails-ap"
 gem "bootstrap-sass"
 gem "bootswatch-rails"
 gem "font-awesome-rails"
+gem "activerecord-import"
 
 gem "kaminari"
 

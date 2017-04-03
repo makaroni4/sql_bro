@@ -22,8 +22,13 @@ class DbConnector
         is_view = columns.first[2]
         table = schema.tables.find_or_create_by!(name: table_name, is_view: is_view)
 
-        columns.each do |_, _, column_name|
-          table.columns.find_or_create_by!(name: column_name)
+        Db::Column.transaction do
+          table.columns.delete_all
+          db_columns_fields = columns.inject([]) do |a, (_, _, _, column_name)|
+            a << [column_name, table.id]
+          end
+
+          Db::Column.import([:name, :db_table_id], db_columns_fields)
         end
       end
     end
