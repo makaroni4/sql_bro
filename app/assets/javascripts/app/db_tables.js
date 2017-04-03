@@ -8,7 +8,7 @@ $(function() {
   });
 
   $tables.dataTable({
-    dom: "<'db-tables-controls'<'js-tables-actions'><f>>" +
+    dom: "<'db-tables-controls'<f><'js-tables-actions'>>" +
          "<'row'<'col-sm-12'tr>>"
   });
 });
