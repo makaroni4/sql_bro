@@ -7,6 +7,13 @@ class Db::ConnectionsController < ApplicationController
 
   def tables
     @db_connection = Db::Connection.find(params[:connection_id])
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: Db::Table.includes(schema: :connection).where(db_connections: { id: @db_connection.id }), each_serializer: DbTableSerializer
+      end
+    end
   end
 
   def show

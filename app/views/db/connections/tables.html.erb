@@ -7,31 +7,4 @@
   Refresh
 <% end %>
 
-<table class="table table-striped table-hover js-db-tables">
-  <thead>
-    <tr>
-      <th>Schema</th>
-      <th>Name</th>
-      <th>Records</th>
-      <th>Size, Mb</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @db_connection.schemas.each do |schema| %>
-      <% schema.tables.each do |table| %>
-        <tr>
-          <td><%= schema.name %></td>
-          <td>
-            <%= table.name %>
-            <% if table.is_view? %>
-              <span class="label label-info">VIEW</span>
-            <% end %>
-          </td>
-          <td><%= table.rows_count %></td>
-          <td><%= table.size %></td>
-        </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+<%= react_component "DbTablesTable", dbConnectionId: @db_connection.id %>

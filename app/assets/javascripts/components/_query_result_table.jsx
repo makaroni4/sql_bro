@@ -10,6 +10,7 @@ class QueryResultTable extends React.Component {
     fields = fields.map(function(field) {
       return <th>{field}</th>;
     });
+
     let tableRow = function(values) {
       return values.map(function(value) {
         if(Object.prototype.toString.call(value) === '[object Array]') {
@@ -19,6 +20,7 @@ class QueryResultTable extends React.Component {
         }
       });
     };
+
     results = results.map(function(values) {
       return <tr>{tableRow(values)}</tr>;
     });
