@@ -2,9 +2,9 @@
   Tables of <b><%= @db_connection.database %></b> database
 </h4>
 
-<%= link_to "#", class: "js-refresh-db-tables btn btn-default btn-sm hidden" do %>
-  <%= fa_icon "refresh" %>
+<a href="#" class="js-refresh-db-tables btn btn-default btn-sm hidden">
+  <i class="fa fa-refresh"></i>
   Refresh
-<% end %>
+</a>
 
 <%= react_component "DbTablesTable", dbConnectionId: @db_connection.id %>

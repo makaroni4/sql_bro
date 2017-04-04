@@ -20,6 +20,11 @@ class DbTablesTable extends React.Component {
     })
   }
 
+  refreshTable() {
+    // load spinner
+    this.loadData();
+  }
+
   componentWillMount() {
     this.loadData();
   }
@@ -38,13 +43,23 @@ class DbTablesTable extends React.Component {
   componentDidUpdate() {
     $("#js-db-tables").dataTable({
       dom: "<'db-tables-controls'<f><'js-tables-actions'>>" +
-           "<'row'<'col-sm-12'tr>>"
+           "<'row'<'col-sm-12'tr>>",
+      fnDrawCallback: function() {
+        var $refreshButton = $(".js-refresh-db-tables").clone();
+        $refreshButton.appendTo($(".js-tables-actions"));
+        $refreshButton.removeClass("hidden");
+        var self = this;
+        $refreshButton.on("click", function(e) {
+          e.preventDefault();
+          self.refreshTable();
+        });
+      }.bind(this)
     });
   }
 
   render() {
     let tableRow = function(dbTable) {
-      return <tr>
+      return <tr key={dbTable.id}>
         <td>{ dbTable.schema_name }</td>
         <td>
           { dbTable.name }
@@ -62,20 +77,22 @@ class DbTablesTable extends React.Component {
     });
 
     return (
-      <table id="js-db-tables" className="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th>Schema</th>
-            <th>Name</th>
-            <th>Records</th>
-            <th>Size, Mb</th>
-          </tr>
-        </thead>
+      <div>
+        <table id="js-db-tables" className="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Schema</th>
+              <th>Name</th>
+              <th>Records</th>
+              <th>Size, Mb</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          { tableBody }
-        </tbody>
-      </table>
+          <tbody>
+            { tableBody }
+          </tbody>
+        </table>
+      </div>
     );
   }
 }
