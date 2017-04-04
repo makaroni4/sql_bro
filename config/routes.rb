@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   namespace :db do
     resources :connections do
       get :tables
+      get :refresh_tables
     end
   end
 end

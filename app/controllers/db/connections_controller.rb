@@ -16,6 +16,18 @@ class Db::ConnectionsController < ApplicationController
     end
   end
 
+  def refresh_tables
+    @db_connection = Db::Connection.find(params[:connection_id])
+
+    connector = @db_connection.connector
+
+    connector.store_columns_info
+    connector.download_table_sizes
+    connector.download_table_row_counts
+
+    render json: Db::Table.includes(schema: :connection).where(db_connections: { id: @db_connection.id }), each_serializer: DbTableSerializer
+  end
+
   def show
   end
 

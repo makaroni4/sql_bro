@@ -8,9 +8,9 @@ class DbTablesTable extends React.Component {
     };
   }
 
-  loadData() {
+  loadDbTables(url) {
     $.ajax({
-      url: Routes.db_connection_tables(this.state.dbConnectionId),
+      url: url,
       dataType: "json",
       success: function(data){
         this.setState({
@@ -20,13 +20,13 @@ class DbTablesTable extends React.Component {
     })
   }
 
-  refreshTable() {
-    // load spinner
-    this.loadData();
+  refreshDbTables() {
+    // TODO: load spinner
+    this.loadDbTables(Routes.db_connection_refresh_tables(this.state.dbConnectionId));
   }
 
   componentWillMount() {
-    this.loadData();
+    this.loadDbTables(Routes.db_connection_tables(this.state.dbConnectionId));
   }
 
   componentDidMount() {
@@ -44,14 +44,14 @@ class DbTablesTable extends React.Component {
     $("#js-db-tables").dataTable({
       dom: "<'db-tables-controls'<f><'js-tables-actions'>>" +
            "<'row'<'col-sm-12'tr>>",
-      fnDrawCallback: function() {
+      fnInitComplete: function() {
         var $refreshButton = $(".js-refresh-db-tables").clone();
         $refreshButton.appendTo($(".js-tables-actions"));
         $refreshButton.removeClass("hidden");
         var self = this;
         $refreshButton.on("click", function(e) {
           e.preventDefault();
-          self.refreshTable();
+          self.refreshDbTables();
         });
       }.bind(this)
     });
