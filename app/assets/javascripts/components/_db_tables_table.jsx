@@ -32,7 +32,8 @@ class DbTablesTable extends React.Component {
   componentDidMount() {
     $("#js-db-tables").dataTable({
       dom: "<'db-tables-controls'<f><'js-tables-actions'>>" +
-           "<'row'<'col-sm-12'tr>>"
+           "<'row'<'col-sm-12'tr>>",
+      paginate: false
     });
   }
 
@@ -44,6 +45,7 @@ class DbTablesTable extends React.Component {
     $("#js-db-tables").dataTable({
       dom: "<'db-tables-controls'<f><'js-tables-actions'>>" +
            "<'row'<'col-sm-12'tr>>",
+      paginate: false,
       fnInitComplete: function() {
         var $refreshButton = $(".js-refresh-db-tables").clone();
         $refreshButton.appendTo($(".js-tables-actions"));
