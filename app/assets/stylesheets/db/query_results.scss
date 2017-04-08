@@ -1,6 +1,4 @@
 .query-results {
-  overflow-x: scroll;
-
   table, td {
     border: 1px solid #F9F9F9;
 
@@ -9,6 +7,9 @@
   }
 
   table {
+    display: block;
+    overflow-x: scroll;
+
     border-collapse: collapse;
 
     table-layout: fixed;
@@ -37,5 +38,9 @@
     text-align: left;
 
     cursor: move;
+  }
+
+  &__count {
+    margin-top: 10px;
   }
 }

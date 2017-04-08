@@ -37,6 +37,10 @@ class QueryResultTable extends React.Component {
             { results }
           </tbody>
         </table>
+
+        <div className="query-results__count">
+          Results: {this.props.resultsCount}
+        </div>
       </div>
     )
   }

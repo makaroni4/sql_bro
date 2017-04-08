@@ -54,7 +54,8 @@
       } else {
         var queryComponent = React.createElement(QueryResultTable, {
           fields: query.fields,
-          results: query.result
+          results: query.result,
+          resultsCount: query.results_count
         });
 
         ReactDOM.render(queryComponent, document.getElementsByClassName("js-query-result-container")[0]);
